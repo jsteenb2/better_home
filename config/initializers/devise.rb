@@ -2,6 +2,8 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
+  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret
+
   config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing

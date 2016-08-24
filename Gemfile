@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #devise
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'figaro'
 
 
 #some useful stuff
