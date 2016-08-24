@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+
   def survey
     @user = User.new
     render 'survey'
@@ -11,11 +13,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    id = params[:id] || current_user.id
+    @user = User.find(id)
   end
 
   def white_listed_survey_params
     params.require(:user).permit( :cost_score, :crime_score,
                                   :transit_score, :commute_score,
                                   :walk_score )
+  end
 end
