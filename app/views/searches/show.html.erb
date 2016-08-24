@@ -58,23 +58,41 @@
   <tr>
     <%= content_tag :th, key %>
     <% if key == 'links' %>
+      <th>
       <% val.each do |k,v| %>
-        <th><%= link_to k, v %></th>
+        <%= link_to k, v %><br>
       <% end %>
+      </th>
     <% elsif key == 'address' %>
-      <th><%= "#{val['street']}\n#{val['city']}\n#{val['state']} #{val['zipcode']}" %></th>
+      <th>
+        <%= "#{val['street']}" %><br>
+        <%= "#{val['city']}" %><br>
+        <%= "#{val['state']} #{val['zipcode']}" %><br>
+      </th>
     <% elsif key == 'lastSoldPrice' %>
       <th><%= "#{val['currency']} #{val['content']}" %></th>
     <% elsif key == 'zestimate' %>
       <th>
-      <%= "Amount: #{val['amount']['currency']} #{val['amount']['__content__']}\n" %>
-      <%= "Last updated: #{val['last_updated']}\n" %><br>
-      <%= "Value change: #{val['valueChange']['currency']} #{val['valueChange']['content']}\n" %><br>
+      <%= "Amount: #{val['amount']['currency']} #{val['amount']['__content__']}" %><br>
+      <%= "Last updated: #{val['last_updated']}" %><br>
+      <%= "Value change: #{val['valueChange']['currency']} #{val['valueChange']['content']}" %><br>
       <%= "Valuation range: " %><br>
       <%= "   LOW: #{val['valuationRange']['low']['currency']} #{val['valuationRange']['low']['content']}" %><br>
       <%= "   HIGH: #{val['valuationRange']['high']['currency']} #{val['valuationRange']['high']['content']}" %><br>
+      </th>
+    <% elsif key == 'localRealEstate' %>
+      <th>
+        <%= "For the region: #{val['region']['zindexValue']}" %><br>
+        <% val['region']['links'].each do |k,v| %>
+          <%= link_to k,v %><br>
+        <% end %>
+        <%= "Name: #{val['name']}" %><br>
+        <%= "Region id: #{val['id']}" %><br>
+      </th>
     <% else %>
-      <%= content_tag :th, val %>
+      <th>
+        <%= content_tag :th, val %><br>
+      </th>
     <% end %>
   </tr>
 <% end %>
