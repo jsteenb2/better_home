@@ -1,7 +1,6 @@
-require 'httparty'
-
-class ZillowAPI
-  attr_reader :options
+# Most likely to be used for presenting in View.
+class ZillowDeepSearch
+  attr_reader :options, :results
 
   include HTTParty
   base_uri "www.zillow.com/"
@@ -12,6 +11,8 @@ class ZillowAPI
     @street_address
     @city
     @state
+
+    # zip is optional
     @zip
   end
 
@@ -39,10 +40,16 @@ class ZillowAPI
     if @zip
       @options[:query][:citystatezip] += " #{@zip}"
     end
+    @options
   end
 
   def search
-    self.class.get("/webservice/GetDeepSearchResults.htm", @options)
+    @results = self.class.get("/webservice/GetDeepSearchResults.htm", @options)
   end
+
+  def parsed_results
+    @results.parsed_response
+  end
+
 
 end
