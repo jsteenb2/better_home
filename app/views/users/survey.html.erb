@@ -1,0 +1,4 @@
+<%= simple_form_for @user, url: create_basic_examples_url  do |f| %>
+  <%= f.input :age, collection: 1..5%>
+  <%= f.button :submit %>
+<% end %>

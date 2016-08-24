@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/kesha-antonov/simple_form.git
+  revision: a1561c930f3be279f3580c2510f2555f2e67a4f4
+  branch: rails-5-0
+  specs:
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -164,6 +173,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   sass-rails (~> 5.0)
+  simple_form!
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
