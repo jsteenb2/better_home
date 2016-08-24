@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 
+#devise
+gem 'devise'
+gem 'omniauth-facebook'
+
 group :development do
   gem 'hirb'
   gem 'guard-rspec', require: false
