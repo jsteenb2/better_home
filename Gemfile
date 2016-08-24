@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 gem 'httparty'
+<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
 gem 'awesome_print', require: 'ap'
 
 #devise
@@ -23,6 +24,9 @@ end
 
 ####################################################
 
+=======
+gem 'soda-ruby', require: 'soda'
+>>>>>>> Added view for search results
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -58,7 +62,13 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'figaro'
+<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
 
+=======
+  gem 'awesome_print', require: 'ap'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+>>>>>>> Added view for search results
 end
 
 group :development do
