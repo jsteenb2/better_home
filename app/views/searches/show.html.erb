@@ -16,7 +16,9 @@
         <%= "#{val['state']} #{val['zipcode']}" %><br>
       </th>
     <% elsif key == 'lastSoldPrice' %>
-      <th><%= "#{val['currency']} #{val['content']}" %></th>
+      <th>
+        <%= "#{val['currency']} #{val['content']}" %><br>
+      </th>
     <% elsif key == 'zestimate' %>
       <th>
       <%= "Amount: #{val['amount']['currency']} #{val['amount']['__content__']}" %><br>
@@ -37,7 +39,7 @@
       </th>
     <% else %>
       <th>
-        <%= content_tag :th, val %><br>
+        <%= val%><br>
       </th>
     <% end %>
   </tr>
