@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-
 #devise
 gem 'devise'
+gem 'omniauth-facebook'
 
 
 #some useful stuff
