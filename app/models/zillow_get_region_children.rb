@@ -59,7 +59,11 @@ class ZillowGetRegionChildren
   end
 
   def parsed_results
+<<<<<<< 8b705e571b0621c48d8239fb3b09146abebb5552
     @results.parsed_response['regionchildren']['response']['list']['region']
+=======
+    @results.parsed_response
+>>>>>>> Working on better parsed results.
   end
 
 

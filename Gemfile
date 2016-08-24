@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 gem 'httparty'
+gem 'awesome_print', require: 'ap'
 
 #devise
 gem 'devise'
@@ -51,6 +52,14 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+  gem 'figaro'
+
+end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
