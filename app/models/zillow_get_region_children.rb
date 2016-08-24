@@ -59,7 +59,23 @@ class ZillowGetRegionChildren
   end
 
   def parsed_results
+<<<<<<< HEAD
     @results.parsed_response['regionchildren']['response']['list']['region']
+=======
+<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
+<<<<<<< 83cd8aeb03088e24534cfe101173a911f913fd4f
+<<<<<<< 8b705e571b0621c48d8239fb3b09146abebb5552
+    @results.parsed_response['regionchildren']['response']['list']['region']
+=======
+    @results.parsed_response
+>>>>>>> Working on better parsed results.
+=======
+    @results.parsed_response['regionchildren']
+>>>>>>> Getting only region children.
+=======
+    @results.parsed_response['regionchildren']['response']['list']['region']
+>>>>>>> Added view for search results
+>>>>>>> from-remote
   end
 
 

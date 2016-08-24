@@ -1,7 +1,37 @@
 source 'https://rubygems.org'
 
+<<<<<<< HEAD
 gem 'httparty'
 gem 'soda-ruby', require: 'soda'
+=======
+####### ADDED GEMS #################################
+gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
+gem 'figaro'
+gem 'httparty'
+<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
+gem 'awesome_print', require: 'ap'
+
+#devise
+gem 'devise'
+gem 'omniauth-facebook'
+
+group :development do
+  gem 'hirb'
+  gem 'guard-rspec', require: false
+  gem "better_errors"
+  gem 'binding_of_caller'
+end
+
+group :development, :test do
+  gem 'pry-byebug'
+end
+
+####################################################
+
+=======
+gem 'soda-ruby', require: 'soda'
+>>>>>>> Added view for search results
+>>>>>>> from-remote
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -27,18 +57,29 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# gem 'bcrypt', '~> 3.1.7's
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'figaro'
+<<<<<<< HEAD
   gem 'awesome_print', require: 'ap'
   gem 'better_errors'
   gem 'binding_of_caller'
+=======
+<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
+
+=======
+  gem 'awesome_print', require: 'ap'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+>>>>>>> Added view for search results
+>>>>>>> from-remote
 end
 
 group :development do
