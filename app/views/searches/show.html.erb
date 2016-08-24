@@ -1,2 +1,12 @@
-<h1>Searches#show</h1>
-<p>Find me in app/views/searches/show.html.erb</p>
+<table>
+<tr>
+<% @property.keys.each do |key| %>
+  <%= content_tag :th, key %>
+<% end %>
+</tr>
+<tr>
+<% @property.values.each do |val| %>
+  <%= content_tag :th, val %>
+<% end %>
+</tr>
+</table>

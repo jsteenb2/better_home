@@ -48,7 +48,7 @@ class ZillowDeepSearch
   end
 
   def parsed_results
-    @results.parsed_response
+    @results.parsed_response['searchresults']['response']['results']['result']
   end
 
 
