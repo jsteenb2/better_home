@@ -18,5 +18,4 @@ class UsersController < ApplicationController
     params.require(:user).permit( :cost_score, :crime_score,
                                   :transit_score, :commute_score,
                                   :walk_score )
-  end
 end
