@@ -34,12 +34,12 @@
         <% val['region']['links'].each do |k,v| %>
           <%= link_to k,v %><br>
         <% end %>
-        <%= "Name: #{val['name']}" %><br>
-        <%= "Region id: #{val['id']}" %><br>
+        <%= "Name: #{val['region']['name']}" %><br>
+        <%= "Region id: #{val['region']['id']}" %><br>
       </th>
     <% else %>
       <th>
-        <%= val%><br>
+        <%= val %><br>
       </th>
     <% end %>
   </tr>
