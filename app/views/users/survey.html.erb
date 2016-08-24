@@ -1,4 +1,4 @@
-<%= simple_form_for @user, :url => survey_path, method: :post   do |f| %>
+<%= simple_form_for @user, :url => survey_user_path, method: :post   do |f| %>
   <%# f.input :age, collection: 1..5, as: :radio_buttons, item_label_class: "radio-inline", :item_wrapper_class => 'inline' %>
   <div >
     <%= f.label :cost_score, "How important is cost of the property?" %>

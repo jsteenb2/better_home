@@ -18,14 +18,16 @@
 
   <body>
     <%= render "shared/nav" %>
-    <%= yield %>
-  </body>
+    <div class="container" id="body-wrap">
+      <%= yield %>
 
-  <footer class="footer">
-
-    <div class="container">
-
-      <p class="text-muted">Better Home</p>
     </div>
-  </footer>
+    <footer class="footer">
+
+      <div class="container">
+
+        <p class="text-muted">Better Home</p>
+      </div>
+    </footer>
+  </body>
 </html>

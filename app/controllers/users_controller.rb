@@ -3,11 +3,11 @@ class UsersController < ApplicationController
 
   def survey
     @user = User.new
-    render 'survey'
   end
 
   def survey_results
-    @user = User.find_by_id(2)
+    id = params[:id] || current_user.id
+    @user = User.find_by_id(id)
     @user.update(white_listed_survey_params)
     redirect_to @user
   end
