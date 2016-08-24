@@ -1,0 +1,10 @@
+<h1>Search for neighborhoods around you</h1>
+<%= form_tag '/search' do %>
+  <%= label_tag "State" %>
+  <%= text_field_tag :state %><br>
+  <%= label_tag "County" %>
+  <%= text_field_tag :county %><br>
+  <%= label_tag "City" %>
+  <%= text_field_tag :city %><br>
+  <%= submit_tag "Submit" %>
+<% end %>

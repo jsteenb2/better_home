@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'httparty'
+gem 'soda-ruby', require: 'soda'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -36,6 +37,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'figaro'
   gem 'awesome_print', require: 'ap'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
