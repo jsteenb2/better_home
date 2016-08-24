@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default navbar-fixed-top" id="main-nav">
+    <div class="col-xs-3">
+      <div class="navbar-header">
+         <a class="navbar-left brand-img">
+          <h5><img src="https://cdn1.iconfinder.com/data/icons/virtual-keyboard/512/geo-poi-pointer-round-atm-function-512.png", style="width: 20px">
+          Better Home </a></h5>
+         </a>
+         
+      </div>
+    </div>
+    <div class="col-xs-9">
+
+      <ul class="nav nav-pills">
+        <li>
+          <span class="label label-info">
+            NAV_BAR
+          </span>
+        </li>
+
+          <li>
+        
+
+
+          <span class="label label-success">
+            User
+          </span>
+
+        </li>
+    
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to "logout", destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "login", new_user_session_path %> 
+          </li>
+          <li>
+            <%= link_to "Sign Up", new_user_registration_path %>
+          </li>
+        <% end %>
+
+        
+      </ul>
+    </div>
+</nav>
