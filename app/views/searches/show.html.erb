@@ -1,12 +1,27 @@
 <table>
-<tr>
-<% @property.keys.each do |key| %>
-  <%= content_tag :th, key %>
+
+<% @property.each do |key,val| %>
+  <tr>
+    <%= content_tag :th, key %>
+    <% if key == 'links' %>
+      <% val.each do |k,v| %>
+        <th><%= link_to k, v %></th>
+      <% end %>
+    <% elsif key == 'address' %>
+      <th><%= "#{val['street']}\n#{val['city']}\n#{val['state']} #{val['zipcode']}" %></th>
+    <% elsif key == 'lastSoldPrice' %>
+      <th><%= "#{val['currency']} #{val['content']}" %></th>
+    <% elsif key == 'zestimate' %>
+      <th>
+      <%= "Amount: #{val['amount']['currency']} #{val['amount']['__content__']}\n" %>
+      <%= "Last updated: #{val['last_updated']}\n" %><br>
+      <%= "Value change: #{val['valueChange']['currency']} #{val['valueChange']['content']}\n" %><br>
+      <%= "Valuation range: " %><br>
+      <%= "   LOW: #{val['valuationRange']['low']['currency']} #{val['valuationRange']['low']['content']}" %><br>
+      <%= "   HIGH: #{val['valuationRange']['high']['currency']} #{val['valuationRange']['high']['content']}" %><br>
+    <% else %>
+      <%= content_tag :th, val %>
+    <% end %>
+  </tr>
 <% end %>
-</tr>
-<tr>
-<% @property.values.each do |val| %>
-  <%= content_tag :th, val %>
-<% end %>
-</tr>
 </table>
