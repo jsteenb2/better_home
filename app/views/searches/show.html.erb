@@ -1,3 +1,4 @@
+<<<<<<< 0e3c48fd1fb31ba8252f0558664804b29cb06aa9
 <<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
 <table>
 
@@ -50,3 +51,17 @@
 <h1>Searches#show</h1>
 <p>Find me in app/views/searches/show.html.erb</p>
 >>>>>>> Added view for search results
+=======
+<table>
+<tr>
+<% @property.keys.each do |key| %>
+  <%= content_tag :th, key %>
+<% end %>
+</tr>
+<tr>
+<% @property.values.each do |val| %>
+  <%= content_tag :th, val %>
+<% end %>
+</tr>
+</table>
+>>>>>>> Basic view.
