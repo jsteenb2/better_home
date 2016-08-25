@@ -1,0 +1,23 @@
+<h1>Search for neighborhoods around you</h1>
+<%= form_tag '/neighborhoods', method: :get do %>
+  <%= label_tag "State" %>
+  <%= text_field_tag :state %><br>
+  <%= label_tag "County" %>
+  <%= text_field_tag :county %><br>
+  <%= label_tag "City" %>
+  <%= text_field_tag :city %><br>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<h1>Search for a specific property</h1>
+<%= form_tag '/property', method: :get do %>
+  <%= label_tag "Street Address" %>
+  <%= text_field_tag :street_address %><br>
+  <%= label_tag "City" %>
+  <%= text_field_tag :city %><br>
+  <%= label_tag "State" %>
+  <%= text_field_tag :state %><br>
+  <%= label_tag "Zip" %>
+  <%= text_field_tag :zip %><br>
+  <%= submit_tag "Submit" %>
+<% end %>

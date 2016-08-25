@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 ####### ADDED GEMS #################################
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
+gem 'httparty'
+gem 'awesome_print', require: 'ap'
 
 #devise
 gem 'devise'
@@ -21,6 +23,7 @@ end
 
 ####################################################
 
+gem 'soda-ruby', require: 'soda'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -46,14 +49,15 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# gem 'bcrypt', '~> 3.1.7's
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug', platform: :mri
+  gem 'byebug', platform: :mri
 end
 
 group :development do
