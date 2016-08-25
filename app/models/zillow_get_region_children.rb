@@ -66,7 +66,8 @@ class ZillowGetRegionChildren
   def zestimates
     parsed_results
     @parsed_results.map do |result|
-      zestimate = "#{result['zindex']['currency']} #{result['zindex']['__content__']}" unless result['zindex'].nil?
+      zestimate = result['zindex']['__content__'].to_i unless result['zindex'].nil?
+      # zestimate = "#{result['zindex']['currency']} #{result['zindex']['__content__']}" unless result['zindex'].nil?
       {name: result['name'],zestimate: zestimate}
     end
   end
