@@ -1,11 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.delivery_method = :letter_opener
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
-  #devise
+
+  # devise
   config.action_mailer.default_url_options
   {
-    host: 'localhost', port: 3000 
+    host: 'localhost', port: 3000
   }
 
 
