@@ -48,7 +48,12 @@ class ZillowDeepSearch
   end
 
   def parsed_results
-    @results.parsed_response['searchresults']['response']['results']['result']
+    @parsed_results ||= @results.parsed_response['searchresults']['response']['results']['result']
+  end
+
+  def coords
+    address = @parsed_results['address']
+    @coords ||= { lat: address['latitude'], lon: address['longitude'] }
   end
 
 
