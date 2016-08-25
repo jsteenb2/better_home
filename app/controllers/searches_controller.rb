@@ -73,20 +73,6 @@ class SearchesController < ApplicationController
       @gruff.write("zestimates_image.png")
     end
 
-    def gruff_coordinates_image
-      prep_gruff
-      @distances = @names_coordinates.first(15).map do |result|
-        # computing for distance from user
-        distance_from_user = (result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs)
-        {name: result[:name], distance: distance_from_user}
-      end
-      @gruff.title = "Each neighborhood's distance from user"
-      distances.each do |result|
-        @gruff.set_data(result[:name],result[:distance])
-      end
-      @gruff.write("coordinates_image.png")
-    end
-
     def get_coords
       @client.coords
     end
@@ -112,7 +98,7 @@ class SearchesController < ApplicationController
         {result[:name] => distance_from_user}
       end
       @gruff.title = "Each neighborhood's distance from user"
-      distances.each do |k,v|
+      @distances.each do |k,v|
         @gruff.set_data(k,v)
       end
       @gruff.write("coordinates_image.png")
@@ -121,11 +107,11 @@ class SearchesController < ApplicationController
 
     def build_neighbor_packages
       @neighborhood_container = []
-      @neighborhoods[0..14].each do |neighbor|
+      @neighborhoods[0..14].each_with_index do |neighbor,i|
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
-        hood_hash = get_zillow_stuff(neighbor, hood_hash)
-        hood_hash
+        hood_hash = get_zillow_stuff(neighbor, hood_hash, i)
+        @neighborhood_container << hood_hash
       end
       #crime crap
     end
@@ -133,6 +119,9 @@ class SearchesController < ApplicationController
     def get_walkscore_stuff(neighbor, hash)
       walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
       transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
+      # walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
+      # transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
+      hash["name"] = neighbor["name"]
       hash["walk_score"] = walk["walkscore"]
       hash["transit_score"] = transit["transit_score"]
       hash["walk_description"] = walk["description"]
@@ -140,11 +129,12 @@ class SearchesController < ApplicationController
       hash
     end
 
-    def get_zillow_stuff(neighbor, hash)
-      hood_hash["cost_score"] = neighbor["zindex"]["__content__"]
-      hood_hash["lat"] = neighbor["latitude"]
-      hood_hash["long"] = neighbor["longitude"]
-      hood_hash["distance_from_poi"] = @distances[neighbor['name']]
+    def get_zillow_stuff(neighbor, hash, idx)
+      hash["cost_score"] = neighbor["zindex"]["__content__"]
+      hash["lat"] = neighbor["latitude"]
+      hash["long"] = neighbor["longitude"]
+      hash["distance_from_poi"] = @distances[idx][neighbor['name']]
+      hash
     end
 
 end
