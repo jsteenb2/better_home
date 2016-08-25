@@ -10,31 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824201624) do
+ActiveRecord::Schema.define(version: 20160825185500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "state_id"
+    t.string   "name",       null: false
+    t.integer  "state_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
   create_table "locations", force: :cascade do |t|
-    t.integer  "house_num"
-    t.string   "street"
-    t.integer  "city_id"
-    t.integer  "zip_id"
+    t.integer  "house_num",       null: false
+    t.string   "street",          null: false
+    t.integer  "city_id",         null: false
+    t.integer  "zip_id",          null: false
     t.integer  "neighborhood_id"
+    t.string   "latitude"
+    t.string   "longitude"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
   create_table "states", force: :cascade do |t|
-    t.string   "name"
-    t.string   "abbr"
+    t.string   "name",       null: false
+    t.string   "abbr",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,9 +93,10 @@ ActiveRecord::Schema.define(version: 20160824201624) do
   end
 
   create_table "zips", force: :cascade do |t|
-    t.string   "zipcode"
+    t.string   "zipcode",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["zipcode"], name: "index_zips_on_zipcode", using: :btree
   end
 
 end
