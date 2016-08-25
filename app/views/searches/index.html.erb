@@ -15,21 +15,45 @@
 </div>
 
 <script>
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": 0,
-      "lng": 0,
-      "picture": {
-        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-        "width":  32,
-        "height": 32
-      },
-      "infowindow": "hello!"
+function initMap() {
+    // User's coordinates.
+    var userCoords = <%= @coords.to_json.html_safe %>;
+    var formattedUserCoords = {
+      lat: parseInt(userCoords.lat), 
+      lng: parseInt(userCoords.lon)
     }
-  ]);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
+
+    // Neighborhood coordinates.
+    var neighborhoodCoordinates = <%= @names_coordinates_json.html_safe %>
+    var formattedCoordinates = neighborhoodCoordinates.map (function(obj) {
+      return {lat: parseInt(obj.coords.lat), lng: parseInt(obj.coords.lon)};
+    }) 
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: formattedUserCoords,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    // Making multiple markers.
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+    for(var i=0; i < formattedCoordinates.length; i++) {
+      position = [formattedCoordinates[i].lat,formattedCoordinates[i].lng]
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(position[0],position[1]),
+        map: map,
+        title: 'Coordinate number ' + i.toString()
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infoWindow.setContent(neighborhoodCoordinates[i].name);
+          infoWindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+}
+
+initMap()
 </script>
