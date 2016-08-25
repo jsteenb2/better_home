@@ -59,6 +59,10 @@ class SearchesController < ApplicationController
       @client.coords
     end
 
+    def get_coords
+      @client.coords
+    end
+
     def prep_gruff
       @gruff = GruffPie.new
     end
