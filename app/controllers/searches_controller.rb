@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  before_action :prep_gruff, only: [:index]
 
   def new
   end
@@ -13,19 +14,13 @@ class SearchesController < ApplicationController
 
   def index
     prep_region_children
-    @neighborhoods = get_region_children
-  end
-
-  def show
-    prep_deep_search
-    @property = get_property
-  end
-
-  def index
-    prep_region_children
     # @neighborhoods = get_region_children
     get_region_children
-    @neighborhoods = @client.zestimates
+    @neighborhoods = @client.parsed_results
+    @names_zestimates = @client.zestimates
+    @names_coordinates = @client.coordinates
+    gruff_zestimates_image
+    # gruff_coordinates_image
   end
 
   private
@@ -62,6 +57,18 @@ class SearchesController < ApplicationController
     def get_property
       @client.search
       @client.parsed_results
+    end
+
+    def prep_gruff
+      @gruff = GruffPie.new
+    end
+
+    def gruff_zestimates_image
+      @gruff.title = "Zestimates per neighborhood"
+      @names_zestimates.first(20).each do |result|
+        @gruff.set_data(result[:name],result[:zestimate].to_i)
+      end
+      @gruff.write("zestimates_image.png")
     end
 
 end
