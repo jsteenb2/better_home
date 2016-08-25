@@ -1,0 +1,16 @@
+<h1>Neighborhoods</h1>
+
+<table>
+<% @neighborhoods.each do |neighborhood| %>
+  <tr>
+  <% neighborhood.keys.each do |key| %>
+    <%= content_tag :th, key %>
+  <% end %>
+  </tr>
+  <tr>
+  <% neighborhood.values.each do |val| %>
+    <%= content_tag :th, val %>
+  <% end %>
+  </tr>
+<% end %>
+</table>

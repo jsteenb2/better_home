@@ -12,8 +12,15 @@ Rails.application.routes.draw do
     post 'survey' => "users#survey_results"
   end
 
+  # get 'search' => 'searches#new'
+
+  get 'property' => 'searches#show'
+
+  get 'neighborhoods' => 'searches#index'
+
   get 'search' => 'search#search'
   post 'search' => 'search#search'
+  get "/apitest" => "walkscores#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # devise_scope :user do
