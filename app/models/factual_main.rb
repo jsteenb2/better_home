@@ -1,4 +1,4 @@
-
+require 'factual' 
 class FactualMain
 
   @@client = Factual.new(Rails.application.secrets.factual_key,
