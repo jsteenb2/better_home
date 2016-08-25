@@ -71,7 +71,7 @@ class SearchesController < ApplicationController
       end
       @gruff.write("zestimates_image.png")
     end
-
+    
     def gruff_coordinates_image
       prep_gruff
       distances = @names_coordinates.first(15).map do |result|
@@ -86,8 +86,5 @@ class SearchesController < ApplicationController
       @gruff.write("coordinates_image.png")
     end
 
-    def prep_gruff
-      @gruff = GruffPie.new
-    end
 
 end
