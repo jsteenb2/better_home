@@ -9,9 +9,14 @@ Devise.setup do |config|
       Rails.application.secrets.twitter_app_id,
       Rails.application.secrets.twitter_app_secret
 
-  config.omniauth :facebook, 
-      Rails.application.secrets.facebook_app_id, 
+  config.omniauth :facebook,
+      Rails.application.secrets.facebook_app_id,
       Rails.application.secrets.facebook_app_secret
+
+  config.omniauth :google_oauth2,
+      Rails.application.secrets.google_app_id,
+      Rails.application.secrets.google_app_secret,
+      {}
 
   config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
