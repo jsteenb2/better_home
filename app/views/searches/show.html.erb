@@ -1,5 +1,5 @@
+<h1>Your property</h1>
 <table>
-
 <% @property.each do |key,val| %>
   <tr>
     <%= content_tag :th, key %>
@@ -45,3 +45,13 @@
   </tr>
 <% end %>
 </table>
+
+
+<h1>Search for neighborhoods around you</h1>
+<%= form_tag '/neighborhoods', method: :get do %>
+  <% address = @property['address'] %>
+  <input type="hidden" name='state' value=<%= address['state'] %>>
+  <input type="hidden" name='city' value=<%= address['city'] %>>
+  <input type="hidden" name='coords' value=<%= ActiveSupport::JSON.encode @coords %>>
+  <%= submit_tag "Submit" %>
+<% end %>
