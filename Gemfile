@@ -11,6 +11,10 @@ gem 'yelp', require: 'yelp'
 gem 'soda-ruby', require: 'soda'
 gem 'gruff', require: 'gruff'
 
+# gmaps + dependencies
+gem 'gmaps4rails'
+gem 'underscore-rails'
+
 #devise
 gem 'devise'
 gem 'omniauth-facebook'
