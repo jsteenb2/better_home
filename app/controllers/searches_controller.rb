@@ -132,7 +132,11 @@ class SearchesController < ApplicationController
     end
 
     def add_crime_score(neighbor,hash)
-      hash['crime_score'] = Score.find_by_neighborhood(neighbor['name']).crime_score
+      if neighborhood = Score.find_by_neighborhood(neighbor['name'])
+        hash['crime_score'] = neighborhood.crime_score
+      else
+        hash['crime_score'] = 2
+      end
       hash
     end
 
