@@ -5,6 +5,9 @@ gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 gem 'httparty'
 gem 'awesome_print', require: 'ap'
+gem 'geokit'
+gem 'factual-api'
+gem 'yelp', require: 'yelp'
 
 #devise
 gem 'devise'
