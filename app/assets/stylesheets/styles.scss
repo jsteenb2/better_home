@@ -64,20 +64,25 @@ body {
         width: 600px;
     }
 
-    @media (min-width: 1200px) {
-        width: 1000px;
+    @media (min-width: 1400px) {
+        width: 900px;
     }
   }
 }
 
 ////////// LOG IN
 #sign-up-container {
-  width: 30%;
+  width: 60%;
 }
 
 #links-container {
   align: center;
 }
+
+#login-logo {
+  width: 200px;
+}
+
 
 .checkbox, .radio {
     margin-top: 0;
@@ -165,7 +170,7 @@ footer {
     float: right;
     margin: 0px 50px 0px 0px;
     color: #000;
-    text-align: right;
+    text-align: center;
 }
 
 .social-icons {
