@@ -10,9 +10,11 @@ class SearchesController < ApplicationController
   def show
     prep_deep_search
     @property = get_property
+    @coords = get_coords
   end
 
   def index
+    @coords = ActiveSupport::JSON.decode(params['coords'])
     prep_region_children
     @neighborhoods = get_region_children
     get_region_children
@@ -26,7 +28,7 @@ class SearchesController < ApplicationController
     # Getting neighborhoods.
     def prep_region_children
       @client = ZillowGetRegionChildren.new
-      params.except(:utf8,:authenticity_token,:controller,:action,:commit).each do |k,v|
+      params.except(:utf8,:authenticity_token,:controller,:action,:commit,:coords).each do |k,v|
         unless v == ''
           @client.send("#{k}=",v)
         end
@@ -56,6 +58,10 @@ class SearchesController < ApplicationController
     def get_property
       @client.search
       @client.parsed_results
+    end
+
+    def get_coords
+      @client.coords
     end
 
     def prep_gruff
