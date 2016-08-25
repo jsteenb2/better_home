@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     post 'survey' => "users#survey_results"
   end
 
+  get "test" => "tests#new"
+  # get 'search' => 'searches#new'
+
+
+  resources :searches
+
+
   resources :searches
 
   get "/apitest" => "walkscores#show"
