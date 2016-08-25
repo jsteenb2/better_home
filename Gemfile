@@ -9,6 +9,7 @@ gem 'geokit'
 gem 'factual-api'
 gem 'yelp', require: 'yelp'
 gem 'letter_opener'
+gem 'delayed_job_active_record'
 
 #devise
 gem 'devise'
