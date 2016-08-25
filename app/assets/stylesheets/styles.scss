@@ -58,7 +58,18 @@ body {
   }
 }
 
+////////// LOG IN
+#sign-up-container {
+  width: 30%;
+}
 
+#links-container {
+  align: center;
+}
+
+.checkbox, .radio {
+    margin-top: 0;
+}
 
 IMG.displayed {
   display: block;
