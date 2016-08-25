@@ -11,13 +11,15 @@ Rails.application.routes.draw do
     get 'survey' => "users#survey"
     post 'survey' => "users#survey_results"
   end
-<<<<<<< HEAD
+
   get "test" => "tests#new"
   # get 'search' => 'searches#new'
-=======
+
 
   resources :searches
->>>>>>> eed079ee2ab68bb4133b62d8eda8667b7553ad4b
+
+
+  resources :searches
 
   get "/apitest" => "walkscores#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -94,8 +94,8 @@ class AddressInformation
 
   def total_traffic_incidents
     client.get("cuks-n6tp", {
-      "$select" => "count(incidntnum) as total_traffic_incidents",
-      "$where" => "date_trunc_y(date) = '2015' and descript like '%TRAFFIC VIOLATIONS%'"
+      "$select" => "descript",
+      "$where" => "date_trunc_y(date) = '2015'"
       })
   end
 
