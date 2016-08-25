@@ -26,10 +26,13 @@ class SearchesController < ApplicationController
 
   private
     def get_distances
+      start = @location
+      Geokit::Geocoders::GoogleGeocoder.api_key = Rails.application.secrets.google_maps_key
       @distances = @names_coordinates.first(15).map do |result|
         # computing for distance from user
-        distance_from_user = -(result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs).abs
-        {result[:name] => distance_from_user}
+
+        end_point = Geokit::Geocoders::GoogleGeocoder.geocode("#{result[:name]} san francisco ca")
+        distance_from_user = @location.distance_to(end_point)
       end
     end
 
@@ -145,7 +148,7 @@ class SearchesController < ApplicationController
       end
       hash["lat"] = neighbor["latitude"]
       hash["long"] = neighbor["longitude"]
-      hash["distance_from_poi"] = @distances[idx][neighbor['name']]
+      hash["distance_from_poi"] = @distances[idx]
       hash
     end
 
