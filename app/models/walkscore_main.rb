@@ -3,7 +3,9 @@ class WalkscoreMain
 #HTTParty.get("http://transit.walkscore.com/transit/score/?lat=47.6101359&lon=-122.3420567&city=Seattle&state=WA&wsapikey=4c1811146683d4a9656db9224300d8d3")
 
 
-  def self.get_transitscore(address)
+  def self.get_transitscore(neighborhood)
+    rough_address = get_address(neighborhood).full_address
+    address = format_address(rough_address)
     url = build_url(address, "transit")
     HTTParty.get(url)
   end
@@ -14,6 +16,15 @@ class WalkscoreMain
   end
 
   private
+
+    def self.get_address(neighborhood)
+      Geokit::Geocoders::GoogleGeocoder.geocode neighborhood
+      #Geokit::Geocoders::GoogleGeocoder.geocode geocoded
+    end
+
+    def self.format_address(address)
+      address.split(",")[0..-2].map(&:strip).join(" ")
+    end
 
     # Takes the type of call, "walk" or "transit", generates the begginning of a
     # url string and builds a hash of all the keys and values that string needs
@@ -52,7 +63,7 @@ class WalkscoreMain
     def self.get_city_state(address)
       hash = {}
       address_params = address.split(" ")
-      hash["city"], hash["state"] = address_params[-3], address_params[-2]
+      hash["city"], hash["state"] = address_params[-3] + '%20' + address_params[-2], address_params[-1]
       hash
     end
 
