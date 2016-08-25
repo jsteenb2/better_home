@@ -1,7 +1,9 @@
 class FactualMain
 
-  @@client = Factual.new(Rails.application.secrets.factual_key,
+  def initialize
+    @@client = Factual.new(Rails.application.secrets.factual_key,
                         Rails.application.secrets.factual_secret)
+  end
 
   def self.get_poi(neighborhood)
     total_poi= []
