@@ -12,6 +12,9 @@ gem 'yelp', require: 'yelp'
 #devise
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
 
 group :development do
   gem 'hirb'
