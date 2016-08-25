@@ -14,7 +14,13 @@
  *= require_self
  */
 
+#sign-up-container {
+  width: 30%;
+}
 
+#links-container {
+  align: center;
+}
 
 IMG.displayed {
   display: block;
@@ -205,6 +211,7 @@ footer {
 .btn-google:hover {
     color: #dd4b39;
 }
+<<<<<<< HEAD
 
 .map-sidebar {
   position: fixed;
