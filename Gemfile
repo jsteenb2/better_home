@@ -15,6 +15,7 @@ gem 'gruff', require: 'gruff'
 # gmaps + dependencies
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'delayed_job_active_record'
 
 #devise
 gem 'devise'
