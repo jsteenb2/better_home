@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   end
 
   def survey_results
+    # location = params[:user][:location_id]
+    sessions[:location] = params[:user][:location_id]
     id = params[:id] || current_user.id
     @user = User.find_by_id(id)
     @user.update(white_listed_survey_params)
@@ -20,9 +22,9 @@ class UsersController < ApplicationController
   private
     def white_listed_survey_params
       params.require(:user)
-        .permit(  :cost_score, 
+        .permit(  :cost_score,
                   :crime_score,
-                  :transit_score, 
+                  :transit_score,
                   :commute_score,
                   :walk_score )
     end

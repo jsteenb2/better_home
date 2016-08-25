@@ -9,7 +9,7 @@ class YelpMain
 
   #takes neighborhood name, city, and state
   def self.get_yelp_poi(neighborhood)
-    @@client.search(neighborhood).businesses
+    @@client.search(neighborhood, limit: 4, sort: 2).businesses
   end
 
 end

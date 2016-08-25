@@ -47,6 +47,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (7.1.1)
     awesome_print (1.7.0)
     bcrypt (3.1.11)
@@ -91,6 +92,9 @@ GEM
     geokit (1.10.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
+    gruff (0.7.0)
+      rmagick (~> 2.13, >= 2.13.4)
     guard (2.14.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -119,6 +123,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.4)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -213,6 +221,7 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rmagick (2.16.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -256,13 +265,11 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
+    underscore-rails (1.8.3)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.1)
@@ -290,11 +297,14 @@ DEPENDENCIES
   factual-api
   figaro
   geokit
+  gmaps4rails
+  gruff
   guard-rspec
   hirb
   httparty
   jbuilder (~> 2.5)
   jquery-rails
+  letter_opener
   listen (~> 3.0.5)
   omniauth-facebook
   omniauth-google-oauth2
@@ -308,9 +318,9 @@ DEPENDENCIES
   soda-ruby
   spring
   spring-watcher-listen (~> 2.0.0)
-  turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  underscore-rails
   web-console
   yelp
 

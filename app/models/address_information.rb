@@ -85,17 +85,17 @@ class AddressInformation
       })
   end
 
-  def traffic_incidents_in(neighborhood, year)
-    client.get("vv57-2fgy", {
-      "$select" => "count(incidntnum) as traffic_incidents",
-      "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) between '#{year}' and '2015'"
-      })
-  end
+  # def traffic_incidents_in(neighborhood, year)
+  #   client.get("vv57-2fgy", {
+  #     "$select" => "count(incidntnum) as traffic_incidents",
+  #     "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) between '#{year}' and '2015'"
+  #     })
+  # end
 
   def total_traffic_incidents
     client.get("cuks-n6tp", {
       "$select" => "count(incidntnum) as total_traffic_incidents",
-      "$where" => "date_trunc_y(date) = '2015' and descript like 'TRAFFIC VIOLATIONS'"
+      "$where" => "date_trunc_y(date) = '2015' and descript like '%TRAFFIC VIOLATIONS%'"
       })
   end
 

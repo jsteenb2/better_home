@@ -59,8 +59,25 @@ class ZillowGetRegionChildren
   end
 
   def parsed_results
-    @results.parsed_response['regionchildren']['response']['list']['region']
+    @parsed_results ||= @results.parsed_response['regionchildren']['response']['list']['region']
   end
 
+  # Creates a hash of the name and zestimate
+  def zestimates
+    parsed_results
+    @parsed_results.map do |result|
+      zestimate = result['zindex']['__content__'].to_i unless result['zindex'].nil?
+      # zestimate = "#{result['zindex']['currency']} #{result['zindex']['__content__']}" unless result['zindex'].nil?
+      {name: result['name'],zestimate: zestimate}
+    end
+  end
+
+  def coordinates
+    parsed_results
+    @parsed_results.map do |result|
+      coords = { lat: result['latitude'], lon: result['longitude'] }
+      {name: result['name'],coords: coords}
+    end
+  end
 
 end
