@@ -8,7 +8,6 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,14 +18,16 @@
 
   <body>
     <%= render "shared/nav" %>
-    <%= yield %>
-  </body>
+    <div class="container" id="body-wrap">
+      <%= yield %>
 
-  <footer class="footer">
- 
-    <div class="container">
-
-      <p class="text-muted">Better Home</p>
     </div>
-  </footer>
+    <footer class="footer">
+
+      <div class="container">
+
+        <p class="text-muted">Better Home</p>
+      </div>
+    </footer>
+  </body>
 </html>

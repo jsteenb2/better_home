@@ -1,0 +1,44 @@
+<%= simple_form_for @user, :url => survey_user_path, method: :post   do |f| %>
+  <%# f.input :age, collection: 1..5, as: :radio_buttons, item_label_class: "radio-inline", :item_wrapper_class => 'inline' %>
+  <div >
+    <%= f.label :cost_score, "How important is cost of the property?" %>
+  </div>
+  <div class="form-group">
+    <%= f.input_field :cost_score, collection: 1..5,
+            as: :radio_buttons,
+            item_wrapper_class: 'radio-inline' %>
+  </div>
+  <div>
+    <%= f.label :transit_score, "How willing are you to use public transit?" %>
+  </div>
+  <div class="form-group">
+    <%= f.input_field :transit_score, collection: 1..5,
+            as: :radio_buttons,
+            item_wrapper_class: 'radio-inline' %>
+  </div>
+  <div>
+    <%= f.label :walk_score, "How important is being able to points of interest?" %>
+  </div>
+  <div class="form-group">
+    <%= f.input_field :walk_score, collection: 1..5,
+            as: :radio_buttons,
+            item_wrapper_class: 'radio-inline' %>
+  </div>
+  <div>
+    <%= f.label :commute_score, "How important is being able to walk to work?" %>
+  </div>
+  <div class="form-group">
+    <%= f.input_field :commute_score, collection: 1..5,
+            as: :radio_buttons,
+            item_wrapper_class: 'radio-inline' %>
+  </div>
+  <div>
+    <%= f.label :crime_score, "How important is for you to have a safe/low crime home?" %>
+  </div>
+  <div class="form-group">
+    <%= f.input_field :crime_score, collection: 1..5,
+            as: :radio_buttons,
+            item_wrapper_class: 'radio-inline' %>
+  </div>
+  <%= f.button :submit, class: "btn btn-success" %>
+<% end %>
