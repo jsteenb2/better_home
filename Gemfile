@@ -6,6 +6,7 @@ gem 'figaro'
 gem 'httparty'
 gem 'awesome_print', require: 'ap'
 gem 'soda-ruby', require: 'soda'
+gem 'gruff', require: 'gruff'
 
 #devise
 gem 'devise'
@@ -23,8 +24,6 @@ group :development, :test do
 end
 
 ####################################################
-
-gem 'soda-ruby', require: 'soda'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
