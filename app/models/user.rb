@@ -9,17 +9,19 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      if auth.provider == "twitter"
-        user.email = auth.info.description
-      else
-        user.email = auth.info.email
+    #checks to see if there is an existing registered user under email address (since it is unique)
+    #twitter has a weird place of putting email information
+    email = auth.provider == "twitter" ? auth.info.description : auth.info.email
+
+    if where(email: email).nil?
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name   # assuming the user model has a name
+        #user.image = auth.info.image # assuming the user model has an image
       end
-
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      #user.image = auth.info.image # assuming the user model has an image
-
+    else 
+      User.find_by_email(email)
     end
   end
 
