@@ -1,16 +1,82 @@
-<h1>Neighborhoods</h1>
+<h1>Neighborhoods near you</h1>
 
-<table>
-<% @neighborhoods.each do |neighborhood| %>
-  <tr>
-  <% neighborhood.keys.each do |key| %>
-    <%= content_tag :th, key %>
-  <% end %>
-  </tr>
-  <tr>
-  <% neighborhood.values.each do |val| %>
-    <%= content_tag :th, val %>
-  <% end %>
-  </tr>
-<% end %>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="map-sidebar">
+      <div id="map" style='width: 500px; height: 800px;'></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-5">
+            <% @names_zestimates.first(15).each do |result| %>
+              <%= render partial: 'shared/result_panel', locals: { name_zestimate: result } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-4">
+        <div class="row">
+          <h2>Based on zestimates</h2>
+          <%= image_tag("chart/zestimates_image.png") %>
+        </div>
+
+        <div class="row">
+          <h2>Based on distance from you</h2>
+          <%= image_tag("chart/coordinates_image.png") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function initMap() {
+    // User's coordinates.
+    var userCoords = <%= @coords.to_json.html_safe %>;
+    var formattedUserCoords = {
+      lat: parseFloat(userCoords.lat), 
+      lng: parseFloat(userCoords.lon)
+    }
+
+    // Neighborhood coordinates.
+    var neighborhoodCoordinates = <%= @names_coordinates_json.html_safe %>
+    var formattedCoordinates = neighborhoodCoordinates.map (function(obj) {
+      return {name: obj.name, lat: parseFloat(obj.coords.lat), lng: parseFloat(obj.coords.lon)}
+    })
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: formattedUserCoords,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    // Making multiple markers.
+    var infoWindow = new google.maps.InfoWindow();
+
+    for(var i=0; i < formattedCoordinates.length; i++) {
+
+      // Create a marker.
+      var marker = new google.maps.Marker({
+        // position: new google.maps.LatLng(position[0],position[1]),
+        position: formattedCoordinates[i],
+        map: map,
+        title: 'Coordinate number ' + i.toString()
+      });
+
+      // Add on-click event for the marker.
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infoWindow.setContent(neighborhoodCoordinates[i].name);
+          infoWindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+}
+
+initMap()
+</script>
