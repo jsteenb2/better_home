@@ -19,33 +19,36 @@ function initMap() {
     // User's coordinates.
     var userCoords = <%= @coords.to_json.html_safe %>;
     var formattedUserCoords = {
-      lat: parseInt(userCoords.lat), 
-      lng: parseInt(userCoords.lon)
+      lat: parseFloat(userCoords.lat), 
+      lng: parseFloat(userCoords.lon)
     }
 
     // Neighborhood coordinates.
     var neighborhoodCoordinates = <%= @names_coordinates_json.html_safe %>
     var formattedCoordinates = neighborhoodCoordinates.map (function(obj) {
-      return {lat: parseInt(obj.coords.lat), lng: parseInt(obj.coords.lon)};
-    }) 
+      return {name: obj.name, lat: parseFloat(obj.coords.lat), lng: parseFloat(obj.coords.lon)}
+    })
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 3,
+      zoom: 7,
       center: formattedUserCoords,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
     // Making multiple markers.
-    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    var infoWindow = new google.maps.InfoWindow();
 
     for(var i=0; i < formattedCoordinates.length; i++) {
-      position = [formattedCoordinates[i].lat,formattedCoordinates[i].lng]
+
+      // Create a marker.
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(position[0],position[1]),
+        // position: new google.maps.LatLng(position[0],position[1]),
+        position: formattedCoordinates[i],
         map: map,
         title: 'Coordinate number ' + i.toString()
       });
 
+      // Add on-click event for the marker.
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infoWindow.setContent(neighborhoodCoordinates[i].name);
