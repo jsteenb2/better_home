@@ -1,5 +1,4 @@
 class SearchesController < ApplicationController
-  before_action :prep_gruff, only: [:index]
 
   def show
   end
@@ -89,6 +88,5 @@ class SearchesController < ApplicationController
       end
       @gruff.write("coordinates_image.png")
     end
-
 
 end
