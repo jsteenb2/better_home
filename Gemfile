@@ -1,15 +1,11 @@
 source 'https://rubygems.org'
 
-<<<<<<< HEAD
-gem 'httparty'
-gem 'soda-ruby', require: 'soda'
-=======
 ####### ADDED GEMS #################################
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 gem 'httparty'
-<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
 gem 'awesome_print', require: 'ap'
+gem 'soda-ruby', require: 'soda'
 
 #devise
 gem 'devise'
@@ -28,10 +24,7 @@ end
 
 ####################################################
 
-=======
 gem 'soda-ruby', require: 'soda'
->>>>>>> Added view for search results
->>>>>>> from-remote
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -67,19 +60,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'figaro'
-<<<<<<< HEAD
   gem 'awesome_print', require: 'ap'
   gem 'better_errors'
   gem 'binding_of_caller'
-=======
-<<<<<<< dcf57c01bf33a401f5d639013cb9dff920dcdc82
-
-=======
-  gem 'awesome_print', require: 'ap'
-  gem 'better_errors'
-  gem 'binding_of_caller'
->>>>>>> Added view for search results
->>>>>>> from-remote
 end
 
 group :development do
