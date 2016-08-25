@@ -8,7 +8,7 @@
 puts "Destroying current scores . . . . . . "
 Score.destroy_all
 
-neighborhoods = ["Mission", "Bernal Heights", "Central Richmind", "Excelsior", "Bayview", "Central Sunset", "Downtown", "Pacific Heights", "Nob Hill", "Visitacion Valley", "Parkside", "Inner Richmond", "South of Market", "Tenderloin", "Noe Valley", "Inner Sunset", "Outer Sunset", "Portola", "Russian Hill", "Outer Parkside"]
+neighborhoods = ["mission", "bernal heights", "central richmind", "excelsior", "bayview", "central sunset", "downtown", "pacific heights", "nob hill", "visitacion valley", "parkside", "inner richmond", "south of market", "tenderloin", "noe valley", "inner sunset", "outer sunset", "portola", "russian hill", "outer parkside"]
 
 @addressinformation = AddressInformation.new
 
