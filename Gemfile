@@ -8,6 +8,10 @@ gem 'awesome_print', require: 'ap'
 gem 'soda-ruby', require: 'soda'
 gem 'gruff', require: 'gruff'
 
+# gmaps + dependencies
+gem 'gmaps4rails'
+gem 'underscore-rails'
+
 #devise
 gem 'devise'
 gem 'omniauth-facebook'
