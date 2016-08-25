@@ -1,8 +1,10 @@
 <div class="result-panel">
   <div class="row">
     <div class="col-md-12">
-      <p class="text-left">Neighborhood: <%= name_zestimate[:name] %></p>
-      <p class="text-left">Avg cost: <%= name_zestimate[:zestimate] %></p>
+      <p class="text-left">Neighborhood: <%= neighborhood["name"] %></p>
+      <p class="text-left">Overall score: <%= neighborhood["overall_score"] %></p>
+      <p class="text-left">Distance from POI: <%= neighborhood["distance_from_poi"].round(2) %> miles</p>
+      <%= link_to "More details", neighborhood_inspect_path(neighborhood: ActiveSupport::JSON.encode(neighborhood)) %>
     </div>
   </div>
 </div>

@@ -1,36 +1,28 @@
-<h1>Neighborhoods near you</h1>
-
 <div class="row">
   <div class="col-md-12">
-    <div class="map-sidebar">
-      <div id="map" style='width: 500px; height: 800px;'></div>
+    <div class="row">
+      <div class="map-sidebar">
+        <div id="map"></div>
+      </div>
     </div>
 
     <div class="row">
       <div class="col-md-10">
         <div class="row">
-          <div class="col-md-4 col-md-offset-5">
-            <% @names_zestimates.first(15).each do |result| %>
-              <%= render partial: 'shared/result_panel', locals: { name_zestimate: result } %>
+          <div class="col-md-12 col-md-offset-2">
+             <h1>Neighborhoods near you</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 col-md-offset-5">
+            <% @neighborhood_container.each do |result| %>
+              <%= render partial: 'shared/result_panel', locals: { neighborhood: result } %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 col-md-offset-4">
-        <div class="row">
-          <h2>Based on zestimates</h2>
-          <%= image_tag("chart/zestimates_image.png") %>
-        </div>
-
-        <div class="row">
-          <h2>Based on distance from you</h2>
-          <%= image_tag("chart/coordinates_image.png") %>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -50,7 +42,7 @@ function initMap() {
     })
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
+      zoom: 11,
       center: formattedUserCoords,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });

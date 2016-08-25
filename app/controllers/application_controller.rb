@@ -5,12 +5,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def neighborhood_score(user, neighborhood)
-    100 -
-      (crime_factor(user.crime_score, neighborhood) +
-      cost_factor(user.cost_score, neighborhood.cost_attr) +
-      transit_factor(user.transit_score, neighborhood.transit_attr) +
-      walkscore_factor(user.walk_score, neighborhood.walkscore_attr) +
-      commute_factor(user.commute_score, neighborhood.distance_away_from_poi_attr))
+    value = 100 -
+      (crime_factor(user.crime_score, neighborhood['crime_score'].to_i) +
+      cost_factor(user.cost_score, neighborhood['cost_score'].to_i) +
+      transit_factor(user.transit_score, neighborhood['transit_score'].to_i) +
+      walkscore_factor(user.walk_score, neighborhood['walk_score'].to_i) +
+      commute_factor(user.commute_score, neighborhood['distance_from_poi'].to_i))
+      value
   end
 
   protected
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
     def crime_factor(scale, hood)
-      (scale - 1) * hood.crime
+      (scale - 1) * hood
     end
 
     def commute_factor(scale, distance_from)
@@ -60,10 +61,10 @@ class ApplicationController < ActionController::Base
     end
 
     def walkscore_factor(scale, score)
-      (scale - 1) * ( 5 * (score/20.0).ceil)
+      (scale - 1) * ( 5 - (score/20.0).ceil)
     end
 
     def transit_factor(scale, score)
-      (scale - 1) * ( 5 * (score/20.0).ceil)
+      (scale - 1) * ( 5 - (score/20.0).ceil)
     end
 end

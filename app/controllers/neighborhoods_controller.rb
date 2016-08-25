@@ -1,6 +1,7 @@
 class NeighborhoodsController < ApplicationController
 
   def show
+    data = ActiveSupport::JSON.decode(params[:neighborhood])
     params[:neighborhood] = "Mission"
     @yelp_responses = YelpMain.get_yelp_poi("#{params[:neighborhood]} san francisco ca")
     @neighborhood_name = params[:neighborhood]
