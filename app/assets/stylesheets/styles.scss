@@ -1,3 +1,15 @@
+.radio-inline
+{
+  outline:0px;
+
+}
+
+#survey-submit
+{
+  width: 60%;
+}
+
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
@@ -52,13 +64,29 @@ body {
         width: 600px;
     }
 
-    @media (min-width: 1200px) {
-        width: 1000px;
+    @media (min-width: 1400px) {
+        width: 900px;
     }
   }
 }
 
+////////// LOG IN
+#sign-up-container {
+  width: 60%;
+}
 
+#links-container {
+  align: center;
+}
+
+#login-logo {
+  width: 200px;
+}
+
+
+.checkbox, .radio {
+    margin-top: 0;
+}
 
 IMG.displayed {
   display: block;
@@ -142,7 +170,7 @@ footer {
     float: right;
     margin: 0px 50px 0px 0px;
     color: #000;
-    text-align: right;
+    text-align: center;
 }
 
 .social-icons {

@@ -1,7 +1,7 @@
 class NeighborhoodsController < ApplicationController
 
   def show
-    params[:neighborhood] = "China Town"
+    params[:neighborhood] = "Mission"
     @yelp_responses = YelpMain.get_yelp_poi("#{params[:neighborhood]} san francisco ca")
     @neighborhood_name = params[:neighborhood]
     @avg_cost = "1234"
