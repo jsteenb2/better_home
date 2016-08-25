@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
       @user.update(white_listed_survey_params)
     end
     session[:location_id] = params[:user][:location_id]
-    redirect_to neighborhoods_path
+    redirect_to searches_path
   end
 
   def index
