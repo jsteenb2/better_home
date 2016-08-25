@@ -1,3 +1,15 @@
+.radio-inline
+{
+  outline:0px;
+
+}
+
+#survey-submit
+{
+  width: 60%;
+}
+
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
@@ -58,7 +70,18 @@ body {
   }
 }
 
+////////// LOG IN
+#sign-up-container {
+  width: 30%;
+}
 
+#links-container {
+  align: center;
+}
+
+.checkbox, .radio {
+    margin-top: 0;
+}
 
 IMG.displayed {
   display: block;
