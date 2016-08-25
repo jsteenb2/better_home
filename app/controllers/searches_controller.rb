@@ -55,6 +55,10 @@ class SearchesController < ApplicationController
                   :walk_score )
     end
 
+    def get_coords
+      @client.coords
+    end
+
     def prep_gruff
       @gruff = GruffPie.new
     end
