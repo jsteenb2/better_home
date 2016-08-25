@@ -107,7 +107,7 @@ class SearchesController < ApplicationController
       prep_gruff
       distances = @names_coordinates.first(15).map do |result|
         # computing for distance from user
-        distance_from_user = (result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs)
+        distance_from_user = -(result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs).abs
         {name: result[:name], distance: distance_from_user}
       end
       @gruff.title = "Each neighborhood's distance from user"
