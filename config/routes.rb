@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'users#show'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
 
-  devise_for :users
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'users#show'
 
   resource :user, except: [:show]
 
@@ -10,12 +12,15 @@ Rails.application.routes.draw do
     post 'survey' => "users#survey_results"
   end
 
-  get 'search' => 'searches#new'
+  # get 'search' => 'searches#new'
 
   get 'property' => 'searches#show'
 
   get 'neighborhoods' => 'searches#index'
 
+  get 'search' => 'search#search'
+  post 'search' => 'search#search'
+  get "/apitest" => "walkscores#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # devise_scope :user do

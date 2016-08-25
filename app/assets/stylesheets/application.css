@@ -14,10 +14,193 @@
  *= require_self
  */
 
+
+IMG.displayed {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px;
+}
+
+#body-wrap {
+  text-align: center;
+}
+
+#new_user {
+  text-align: center;
+}
+
+#sign-up {
+  text-align: center;
+}
+
+#sign-up-mini-1 {
+  display: inline-block;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #0099cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+#btn-0 {
+  /*background: #146eb4;*/
+}
+
+#btn-1 {
+ /* background: #0099e5;*/
+;
+}
+
+#btn-2 {
+ /* background: #fd5c63;*/
+}
+
+/*#main-nav {
+
+  background-color: #3b5998;
+}
+
+#main-nav a:link {
+  color: white;
+  font-family: "Oswald", Helvetica, Arial, sans-serif!important;
+
+}
+
+#main-nav a:visited
+{
+  color: white;
+}*/
+
+#main-nav a:hover
+{
+  color: black;
+}
+
+
+a:link { color: #3b5998 }
+
+#big-body {
+  background-color: #dfe3ee  ;
+}
+
 footer {
     bottom: 0px;
     float: right;
     margin: 0px 50px 0px 0px;
     color: #000;
     text-align: right;
+}
+
+.social-icons {
+  padding-top: 10px;
+  margin-bottom: 35px;
+}
+
+.social-icons:last-child {
+  padding-top: 20px;
+}
+
+.social-icons .btn.btn-clear{
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.social-icons .btn {
+  margin-right: 15px;
+  text-align: center;
+}
+
+.btn.btn-clear, {
+  font-weight: 700;
+  transition: all .9s ease;
+}
+
+.btn.btn-clear:hover {
+  border: none;
+  background: #f05f40;
+  box-shadow: inset 0 0 6px rgba(200, 95, 64, 0.7);
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+}
+
+#studies-twitter {
+  background-color: white;
+
+  &:hover {
+    background-color: #f05f40;
+  }
+}
+
+.btn.btn-inverse {
+  font-weight: 700;
+  color: white;
+  border: none;
+  background: #f05f40;
+  transition: all .9s ease;
+  box-shadow: none;
+}
+
+.btn.btn-inverse:hover {
+  background: none;
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+}
+
+.btn-round i {
+  font-size: 30px;
+  line-height: 50px;
+}
+
+.btn-round {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  padding: 0;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.7);
+}
+
+.btn-github:hover {
+    color: #000;
+}
+
+.btn-twitter:hover {
+    color: #00aced;
+    box-shadow: none;
+}
+
+.btn-clear.btn-twitter:hover{
+  color: #00aced;
+  box-shadow: none;
+}
+
+.btn-facebook:hover {
+    color: #204385;
+}
+
+.btn-google:hover {
+    color: #dd4b39;
 }

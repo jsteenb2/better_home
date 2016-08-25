@@ -1,0 +1,6 @@
+<% @response.each do |rep| %>
+  <p><%= rep %></p>
+<% end %>
+
+
+<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=<%= @neighborhood_name %>%20san%20francisco%20ca%20best%20shops%20and%20food&key=<%= Rails.application.secrets.google_maps_key %>" allowfullscreen></iframe>

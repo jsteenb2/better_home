@@ -17,9 +17,13 @@ class UsersController < ApplicationController
     @user = User.find(id)
   end
 
-  def white_listed_survey_params
-    params.require(:user).permit( :cost_score, :crime_score,
-                                  :transit_score, :commute_score,
-                                  :walk_score )
-  end
+  private
+    def white_listed_survey_params
+      params.require(:user)
+        .permit(  :cost_score, 
+                  :crime_score,
+                  :transit_score, 
+                  :commute_score,
+                  :walk_score )
+    end
 end

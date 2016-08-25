@@ -5,6 +5,9 @@ gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
 gem 'httparty'
 gem 'awesome_print', require: 'ap'
+gem 'geokit'
+gem 'factual-api'
+gem 'yelp', require: 'yelp'
 gem 'soda-ruby', require: 'soda'
 gem 'gruff', require: 'gruff'
 
@@ -15,6 +18,9 @@ gem 'underscore-rails'
 #devise
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
 
 group :development do
   gem 'hirb'
@@ -61,7 +67,6 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
 end
 
 group :development do
