@@ -13,7 +13,6 @@ class GruffPie
     @gruff.data(row,value)
   end
 
-  # Takes a filename string, and writes an image to the root.
   def write(filename)
     @image = @gruff.write("#{Rails.root}/app/assets/images/chart/#{filename}")
   end
