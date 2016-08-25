@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'survey' => "users#survey"
     post 'survey' => "users#survey_results"
   end
-
+  get "test" => "tests#new"
   # get 'search' => 'searches#new'
 
   get 'property' => 'searches#show'
