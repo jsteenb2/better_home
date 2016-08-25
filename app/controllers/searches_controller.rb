@@ -14,9 +14,8 @@ class SearchesController < ApplicationController
 
   def index
     prep_region_children
-    # @neighborhoods = get_region_children
+    @neighborhoods = get_region_children
     get_region_children
-    @neighborhoods = @client.parsed_results
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
     gruff_zestimates_image
