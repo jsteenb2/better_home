@@ -1,12 +1,15 @@
-<%= simple_form_for @user, :url => survey_user_path, method: :post   do |f| %>
-  <%# f.input :age, collection: 1..5, as: :radio_buttons, item_label_class: "radio-inline", :item_wrapper_class => 'inline' %>
+<div class="col-sm-5">
+  <img src="http://placehold.it/350x600"></div>
+<div class="col-sm-7">
+<%= simple_form_for @user, :url => searches_path, method: :post do |f| %>
   <div >
     <%= f.label :cost_score, "How important is cost of the property?" %>
   </div>
   <div class="form-group">
     <%= f.input_field :cost_score, collection: 1..5,
             as: :radio_buttons,
-            item_wrapper_class: 'radio-inline' %>
+            item_wrapper_class: 'radio-inline',
+            input_html: {required: true} %>
   </div>
   <div>
     <%= f.label :transit_score, "How willing are you to use public transit?" %>
@@ -40,5 +43,9 @@
             as: :radio_buttons,
             item_wrapper_class: 'radio-inline' %>
   </div>
-  <%= f.button :submit, class: "btn btn-success" %>
+  <div class="form-group">
+    <%= f.input_field :location_id, as: :search, class: 'form-control', placeholder: "Where to boss. . . ." %>
+  </div>
+  <%= f.button :submit, class: "btn btn-success btn-block" %>
 <% end %>
+</div>
