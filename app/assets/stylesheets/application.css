@@ -204,3 +204,11 @@ footer {
 .btn-google:hover {
     color: #dd4b39;
 }
+
+.map-sidebar {
+  position: fixed;
+  /*height: 132px;*/
+  left: 0;
+  top: 0px;
+  width: 24px;
+}
