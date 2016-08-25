@@ -4,7 +4,11 @@ class GruffPie
   def initialize
     @gruff = Gruff::Pie.new 
   end
-  
+
+  def title=(title)
+    @gruff.title = title
+  end
+
   def set_data(row,value)
     @gruff.data(row,value)
   end

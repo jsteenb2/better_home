@@ -71,4 +71,12 @@ class SearchesController < ApplicationController
       @gruff.write("zestimates_image.png")
     end
 
+    # def gruff_coordinates_image
+    #   @gruff.title = "Coordinates per neighborhood"
+    #   @names_zestimates.first(20).each do |result|
+    #     @gruff.set_data(result[:name],result[:zestimate].to_i)
+    #   end
+    #   @gruff.write("zestimates_image.png")
+    # end
+
 end
