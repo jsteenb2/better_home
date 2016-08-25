@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 ####### ADDED GEMS #################################
 gem 'simple_form', github: 'kesha-antonov/simple_form', branch: 'rails-5-0'
 gem 'figaro'
+gem 'geokit'
+gem 'httparty'
+gem 'factual-api'
+gem 'yelp', require: 'yelp'
 
 #devise
 gem 'devise'

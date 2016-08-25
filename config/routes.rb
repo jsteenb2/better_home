@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'search' => 'search#search'
   post 'search' => 'search#search'
+  get "/apitest" => "walkscores#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # devise_scope :user do
