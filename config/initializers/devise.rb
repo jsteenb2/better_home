@@ -5,7 +5,13 @@ Devise.setup do |config|
 
   config.secret_key = '1f1d663b8fe6b354b0ad57f6592a0daff0245ac7e18b9208f0472c11b3761c6af4268b9d10d2b24b16b5940117a3340e714a36aae2442e64030c5e095d3a21ae'
 
-  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret
+  config.omniauth :twitter,
+      Rails.application.secrets.twitter_app_id,
+      Rails.application.secrets.twitter_app_secret
+
+  config.omniauth :facebook, 
+      Rails.application.secrets.facebook_app_id, 
+      Rails.application.secrets.facebook_app_secret
 
   config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
