@@ -13,7 +13,7 @@ class User < ApplicationRecord
     #twitter has a weird place of putting email information
     email = auth.provider == "twitter" ? auth.info.description : auth.info.email
 
-    if where(email: email).nil?
+    if where(email: email).empty?
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = email
         user.password = Devise.friendly_token[0,20]
