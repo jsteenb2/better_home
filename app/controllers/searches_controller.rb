@@ -61,3 +61,5 @@ class SearchesController < ApplicationController
       @client.search
       @client.parsed_results
     end
+
+end
