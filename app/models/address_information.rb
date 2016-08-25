@@ -24,7 +24,7 @@ class AddressInformation
     zipcode = zipcode.to_s
     client.get("93gi-sfd2", {
       "$select" => "count(neighborhood) as neighborhood_evictions",
-      "$where" =>  "neighborhood like '#{neighborhood}' and date_trunc_y(file_date) between '#{year}' and '2015'",
+      "$where" =>  "lower(neighborhood) like '#{neighborhood.downcase}' and date_trunc_y(file_date) between '#{year}' and '2015'",
       "$group" => "neighborhood"
       })
   end
@@ -85,16 +85,16 @@ class AddressInformation
       })
   end
 
-  # def traffic_incidents_in(neighborhood, year)
-  #   client.get("vv57-2fgy", {
-  #     "$select" => "count(incidntnum) as traffic_incidents",
-  #     "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) between '#{year}' and '2015'"
-  #     })
-  # end
+  def traffic_incidents_in(neighborhood, year)
+    client.get("cuks-n6tp", {
+      "$select" => "count(descript) as traffic_incidents",
+      "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) = '2015'"
+      })
+  end
 
   def total_traffic_incidents
     client.get("cuks-n6tp", {
-      "$select" => "descript",
+      "$select" => "count(descript)",
       "$where" => "date_trunc_y(date) = '2015'"
       })
   end
@@ -109,6 +109,7 @@ class AddressInformation
 
 
   def eviction_score(neighborhood, year)
+    return 2 if eviction_notices_in(neighborhood, year) == []
     score = ((eviction_notices_in(neighborhood, year).first.first[1].to_i.to_f / total_eviction_notices.first.first[1].to_i) / neighborhood_population_ratio(neighborhood)) * 2.5
     if score >= 5.0
       5
@@ -116,7 +117,6 @@ class AddressInformation
       score.round
     end
   end
-
 
   def fire_safety_score(neighborhood, year)
     score = ((firesafety_complaints_in(neighborhood, year).first.first[1].to_i.to_f / total_firesafety_complaints.first.first[1].to_i) / neighborhood_population_ratio(neighborhood)) * 2.5
@@ -126,7 +126,6 @@ class AddressInformation
       score.round
     end
   end
-
 
   def crime_score(neighborhood, year)
     score = ((crime_in_neighborhood(neighborhood, year).first.first[1].to_i.to_f / total_crime.first.first[1].to_i) / police_population_ratio(neighborhood)) * 2.5
@@ -146,9 +145,12 @@ class AddressInformation
     end
   end
 
-  def traffic_violations_score
-
-
+  def traffic_violations_score(neighborhood, year)
+    score = ((traffic_incidents_in(neighborhood, year).first.first[1].to_i.to_f / total_traffic_incidents.first.first[1].to_i) / police_population_ratio(neighborhood)) * 2.5
+    if score >= 5.0
+      5
+    else
+      score.round
+    end
   end
-
 end
