@@ -22,6 +22,7 @@ class SearchesController < ApplicationController
     # gruff_zestimates_image
     # gruff_coordinates_image
     build_neighbor_packages
+    sort_by_overall_score
   end
 
   private
@@ -128,7 +129,6 @@ class SearchesController < ApplicationController
         hood_hash = add_overall_score(neighbor, hood_hash)
         @neighborhood_container << hood_hash
       end
-      #crime crap
     end
 
     def add_crime_score(neighbor,hash)
@@ -166,6 +166,12 @@ class SearchesController < ApplicationController
       hash["long"] = neighbor["longitude"]
       hash["distance_from_poi"] = @distances[idx]
       hash
+    end
+
+    def sort_by_overall_score
+      @neighborhood_container = @neighborhood_container.sort do |a,b|
+        b['overall_score'] <=> a['overall_score']
+      end
     end
 
 end
