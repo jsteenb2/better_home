@@ -106,17 +106,19 @@ class SearchesController < ApplicationController
 
     def gruff_coordinates_image
       prep_gruff
-      distances = @names_coordinates.first(15).map do |result|
+      @distances = @names_coordinates.first(15).map do |result|
         # computing for distance from user
-        distance_from_user = (result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs)
-        {name: result[:name], distance: distance_from_user}
+        distance_from_user = -(result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs).abs
+        {result[:name] => distance_from_user}
+        # {name: result[:name], distance: distance_from_user}
       end
       @gruff.title = "Each neighborhood's distance from user"
-      distances.each do |result|
-        @gruff.set_data(result[:name],result[:distance])
+      distances.each do |k,v|
+        @gruff.set_data(k,v)
       end
       @gruff.write("coordinates_image.png")
     end
+
 
     def build_neighbor_packages
       @neighborhood_container = []
@@ -124,12 +126,9 @@ class SearchesController < ApplicationController
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
         hood_hash = get_zillow_stuff(neighbor, hood_hash)
+        hood_hash
       end
       #crime crap
-      #cost_of_house => CJ
-      #transit, that's me
-      #walkscore, that's me
-      #distance to POI
     end
 
     def get_walkscore_stuff(neighbor, hash)
@@ -146,6 +145,7 @@ class SearchesController < ApplicationController
       hood_hash["cost_score"] = neighbor["zindex"]["__content__"]
       hood_hash["lat"] = neighbor["latitude"]
       hood_hash["long"] = neighbor["longitude"]
+      hood_hash["distance_from_poi"] = @distances[neighbor['name']]
     end
 
 end
