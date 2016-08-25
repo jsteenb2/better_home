@@ -1,5 +1,4 @@
 class SearchesController < ApplicationController
-  before_action :prep_gruff, only: [:index]
 
   def new
   end
@@ -17,11 +16,10 @@ class SearchesController < ApplicationController
     @coords = ActiveSupport::JSON.decode(params['coords'])
     prep_region_children
     @neighborhoods = get_region_children
-    get_region_children
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
     gruff_zestimates_image
-    # gruff_coordinates_image
+    gruff_coordinates_image
   end
 
   private
@@ -69,19 +67,26 @@ class SearchesController < ApplicationController
     end
 
     def gruff_zestimates_image
+      prep_gruff
       @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(20).each do |result|
+      @names_zestimates.first(15).each do |result|
         @gruff.set_data(result[:name],result[:zestimate].to_i)
       end
       @gruff.write("zestimates_image.png")
     end
 
-    # def gruff_coordinates_image
-    #   @gruff.title = "Coordinates per neighborhood"
-    #   @names_zestimates.first(20).each do |result|
-    #     @gruff.set_data(result[:name],result[:zestimate].to_i)
-    #   end
-    #   @gruff.write("zestimates_image.png")
-    # end
+    def gruff_coordinates_image
+      prep_gruff
+      distances = @names_coordinates.first(15).map do |result|
+        # computing for distance from user
+        distance_from_user = (result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs)
+        {name: result[:name], distance: distance_from_user}
+      end
+      @gruff.title = "Each neighborhood's distance from user"
+      distances.each do |result|
+        @gruff.set_data(result[:name],result[:distance])
+      end
+      @gruff.write("coordinates_image.png")
+    end
 
 end
