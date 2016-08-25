@@ -15,8 +15,8 @@
         </div>
         <div class="row">
           <div class="col-md-7 col-md-offset-5">
-            <% @names_zestimates.first(15).each do |result| %>
-              <%= render partial: 'shared/result_panel', locals: { name_zestimate: result } %>
+            <% @neighborhood_container.each do |result| %>
+              <%= render partial: 'shared/result_panel', locals: { neighborhood: result } %>
             <% end %>
           </div>
         </div>

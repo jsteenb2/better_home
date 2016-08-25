@@ -18,12 +18,22 @@ class SearchesController < ApplicationController
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
     @names_coordinates_json = @names_coordinates.first(15).to_json
-    gruff_zestimates_image
-    gruff_coordinates_image
+    get_distances
+    # gruff_zestimates_image
+    # gruff_coordinates_image
     build_neighbor_packages
   end
 
   private
+    def get_distances
+      @distances = @names_coordinates.first(15).map do |result|
+        # computing for distance from user
+        distance_from_user = -(result[:coords][:lat].to_f.abs - @coords[:lat].to_f.abs) + (result[:coords][:lon].to_f.abs - @coords[:lon].to_f.abs).abs
+        {result[:name] => distance_from_user}
+      end
+    end
+
+
     # Getting neighborhoods.
     def prep_region_children
       @client = ZillowGetRegionChildren.new
@@ -130,7 +140,9 @@ class SearchesController < ApplicationController
     end
 
     def get_zillow_stuff(neighbor, hash, idx)
-      hash["cost_score"] = neighbor["zindex"]["__content__"]
+      unless neighbor["zindex"].nil?
+        hash["cost_score"] = neighbor["zindex"]["__content__"]
+      end
       hash["lat"] = neighbor["latitude"]
       hash["long"] = neighbor["longitude"]
       hash["distance_from_poi"] = @distances[idx][neighbor['name']]
