@@ -1,3 +1,4 @@
+require 'factual'
 
 class FactualMain
 
