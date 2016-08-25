@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # get 'search' => 'searches#new'
 
   get 'property' => 'searches#show'
+  get 'neighborhood_inspect' => 'neighborhoods#show'
 
   get 'neighborhoods' => 'searches#index'
 
