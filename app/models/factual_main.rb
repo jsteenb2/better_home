@@ -3,7 +3,7 @@ class FactualMain
   @@client = Factual.new(Rails.application.secrets.factual_key,
                         Rails.application.secrets.factual_secret)
 
-  def self.get_poi(neighborhood, distance)
+  def self.get_poi(neighborhood)
     total_poi= []
     page = 1
     1.upto(7) do |count|
