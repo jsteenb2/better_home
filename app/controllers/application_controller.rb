@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       elsif distance_from > 3.0
         factor = 1
       else
-        facotr = 0
+        factor = 0
       end
       (scale - 1) * factor
     end
