@@ -124,9 +124,21 @@ class SearchesController < ApplicationController
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
         hood_hash = get_zillow_stuff(neighbor, hood_hash, i)
+        hood_hash = add_crime_score(neighbor, hood_hash)
+        hood_hash = add_overall_score(neighbor, hood_hash)
         @neighborhood_container << hood_hash
       end
       #crime crap
+    end
+
+    def add_crime_score(neighbor,hash)
+      hash['crime_score'] = Score.find_by_neighborhood(neighbor['name']).crime_score
+      hash
+    end
+
+    def add_overall_score(neighbor,hash)
+      hash['overall_score'] = neighborhood_score(current_user,hash)
+      hash
     end
 
     def get_walkscore_stuff(neighbor, hash)
