@@ -20,6 +20,7 @@ class SearchesController < ApplicationController
     @neighborhoods = get_region_children
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
+    @names_coordinates_json = @names_coordinates.first(15).to_json
     gruff_zestimates_image
     gruff_coordinates_image
   end
