@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-
+  helper SearchesHelper
   def create
     if current_user
       id = params[:id] || current_user.id

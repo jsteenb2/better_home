@@ -1,2 +1,5 @@
 module SearchesHelper
+  def get_image
+    ['https://lonelyplanetimages.imgix.net/a/g/hi/t/9cf024dfd5c0bcb2b17f4785340145ea-san-francisco.jpg?sharp=10&vib=20&w=1200', 'http://az616578.vo.msecnd.net/files/2016/04/30/635976559086276586-1703857136_11.jpg', 'https://media-cdn.tripadvisor.com/media/photo-s/07/a1/76/67/let-the-cable-car-a-national.jpg', 'http://usa.sae.edu/assets/Campuses/San-Francsico/2015/San_Francisco_city_view.jpg', 'http://trekalong.com/files/2013/07/p1020769-1-620x350.jpg', "http://media.cntraveler.com/photos/55d242c637284fb1079cba35/16:9/w_1024,c_limit/golden-gate-ferry-san-francisco.jpg", "http://media.cntraveler.com/photos/55d242c637284fb1079cba35/16:9/w_1024,c_limit/golden-gate-ferry-san-francisco.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/07/a1/76/6b/one-of-the-most-photographed.jpg", "https://duranvirginia.files.wordpress.com/2014/02/virginia-duran-blog-10-sites-to-take-the-best-skyline-pictures-in-san-francisco-mandarin-oriental-at-dusk.jpg", "http://mcmanuslab.ucsf.edu/sites/mcmanuslab.ucsf.edu/files/imagepicker/m/mmcmanus/san-francisco.jpg"][rand(10)]
+  end
 end
