@@ -1,6 +1,7 @@
 # Better Home
 - - -
 
+##[DEMO](https://github.com/jsteenb2/better_home/blob/master/demo.md)
 
 # Project Walkthrough
 
@@ -78,8 +79,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* Heroku - Ruby on Rails, utilizing the SendGrid
-* 
+* Heroku - Ruby on Rails, utilizing the SendGrid and delayed jobs to run the worker dynos
+* Bootstrap
+* JS
 * Atom - ergaerga
 
 ## Authors
