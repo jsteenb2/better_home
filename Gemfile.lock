@@ -98,8 +98,6 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
-    gruff (0.7.0)
-      rmagick (~> 2.13, >= 2.13.4)
     guard (2.14.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -226,7 +224,6 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rmagick (2.16.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -304,7 +301,6 @@ DEPENDENCIES
   figaro
   geokit
   gmaps4rails
-  gruff
   guard-rspec
   hirb
   httparty
