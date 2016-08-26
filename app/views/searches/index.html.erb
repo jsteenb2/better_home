@@ -34,10 +34,12 @@
           <% @neighborhood_container[3..-1].each do |result| %>
             <%= render partial: 'shared/result_panel', locals: { neighborhood: result } %>
           <% end %>
+          <div class="text-center">
+            <%= will_paginate @neighborhood_container %>
+          </div>
         </div>
       </div>
     </div>
-    <%= will_paginate @neighborhood_container %>
   </div>
 <div class="col-md-9 col-md-offset-3">
   <script class= "col-md-9 col-md-offset-3">
