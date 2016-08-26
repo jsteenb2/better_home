@@ -19,6 +19,7 @@ class SearchesController < ApplicationController
     @names_coordinates = @client.coordinates
     @names_coordinates_json = @names_coordinates.first(15).to_json
     get_distances
+    
     # gruff_zestimates_image
     # gruff_coordinates_image
     build_neighbor_packages
@@ -121,6 +122,7 @@ class SearchesController < ApplicationController
 
     def build_neighbor_packages
       @neighborhood_container = []
+      #..number of neighbohoods
       @neighborhoods[0..14].each_with_index do |neighbor,i|
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
