@@ -1,7 +1,7 @@
 <div class="card">
   <img class="img-fluid" src="https://realestateca.files.wordpress.com/2011/03/paintedladies.jpg" alt="card-img" style="height: 180px; width: 100%; display=block;" data-holder-rendered="true">
   <div class="card-block" >
-    <h4 class="card-title"> Neighborhood: <%= neighborhood["name"] %> </h4>
+    <h4 class="card-title"><strong><%= neighborhood["name"] %></strong></h4>
     <p class="card-text"> Overall score: <%= neighborhood["overall_score"] %> </p>
 
     <p class="card-text"> Distance from POI: <%= neighborhood["distance_from_poi"].round(2) %> miles </p>
@@ -9,5 +9,3 @@
     <%= link_to "More details", neighborhood_inspect_path(neighborhood: ActiveSupport::JSON.encode(neighborhood)), class: "btn btn-primary active" %>
   </div>
 </div>
-
-
