@@ -1,77 +1,99 @@
-<h1 style="margin-top: -20px; margin-bottom: 20px;"><strong><%= @neighborhood_name %></strong></h1>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <h2>PUT TRANSIT AND WALKSCORE IMG HERE</h2>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-6">
-            <%= content_tag(:h4, "Average Cost: #{@avg_cost}", class: "text-left") if @avg_cost %>
-            <h4 class="text-left">Average Commute</h4>
-            <ul class="text-left">
-              <li><%= get_commute(@distance, 3.1) %> mins by foot</li>
-              <li><%= get_commute(@distance, 9.6) %> mins by bike</li>
-              <li><%= get_commute(@distance, 20) %> mins by car</li>
-            </ul>
+<div id="body-wrap">
+  <div class="page-header">
+    <h1 style="margin-top: -20px; margin-bottom: 20px;"><strong><%= @neighborhood_name %></strong></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= image_tag("/commute_icon.png", style: "width: 25%; margin-top: 10px;") if @distance %>
+              <h4 class="text-center">Commute</h4>
+              <table class="table table-hover table-condensed" id="commute-table">
+                <thead>
+                  <tr>
+                    <th>Foot</th>
+                    <th>Bike</th>
+                    <th>Car</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><%= get_commute(@distance, 3.1) %></td>
+                    <td><%= get_commute(@distance, 9.6) %></td>
+                    <td><%= get_commute(@distance, 20) %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <%= image_tag("/cost_icon.png", style: "width: 25%; margin-top: 15px;") if @avg_cost %>
+              <%= content_tag(:h4, "Cost: $#{@avg_cost}") if @avg_cost %>
+            </div>
+            <div class="col-md-6">
+              <h4>
+              <%= image_tag("/walk_icon.png", style: "width: 25%;") %><br><%= image_tag(@walkscore['logo_url']) %> <%= @walkscore['walkscore'] %></h4>
+              <%= link_to("More Info", @walkscore['ws_link']) %>
+              <h4><%= image_tag("/public_icon.png", style: "width: 25%;") %><br><%= image_tag(@transitscore['logo_url']) %> <%= @transitscore['transit_score'] %></h4>
+              <%= link_to("More Info", @transitscore['ws_link']) %>
+              <h4><%= image_tag("/crime_icon.png", style: "width: 25%;") if @crime %>
+              </h4>
+              <%= content_tag(:h4, "Crime Score: #{@crime}") if @crime %>
+            </div>
           </div>
-          <div class="col-md-6">
-            <h4 class="text-left">Public Transit Nearby: list list list list list list list</h4>
-            <h4 class="text-left">How walkable? This is where we will put walkscore description</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <h2>Most Popular Places</h2>
+        <div class="panel-body">
+          <div class="row">
+            <% @yelp_responses.each do |response| %>
+              <div class="col-md-3">
+                <p><%= link_to response.name, response.url %></p>
+              </div>
+            <% end %>
+          </div>
+          <div class="row">
+            <% @yelp_responses.each do |response| %>
+              <div class="col-md-3">
+                <%= link_to(image_tag(response.image_url, class: "img-circle"), response.url) %>
+              </div>
+            <% end %>
+          </div>
+          <div class="row">
+            <% @yelp_responses.each do |response| %>
+              <div class="col-md-3">
+                <%= image_tag(response.rating_img_url) %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <h2>Most Popular Places</h2>
-      <div class="panel-body">
-        <div class="row">
-          <% @yelp_responses.each do |response| %>
-            <div class="col-md-3">
-              <p><%= link_to response.name, response.url %></p>
-            </div>
-          <% end %>
+  <div class="row">
+    <div class="col-md-6">
+      
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="list-group">
+            <a  class="list-group-item active" style="color: white;"> This neighborhood has <strong><%= @transitscore['summary'] %> </a>
+            <a  class="list-group-item "> This neighborhood is <strong><%= @walkscore['description'] %></a>
+            <a  class="list-group-item "> There are <strong><%= @factual['347'] %></strong> resturants nearby</a>
+            <a  class="list-group-item "> There are <strong><%= @factual['34'] %></strong> schools nearby nearby</a>
+            <a  class="list-group-item "> There are <strong><%= @factual['177'] %></strong> businesses nearby nearby</a>
+          </div>
         </div>
-        <div class="row">
-          <% @yelp_responses.each do |response| %>
-            <div class="col-md-3">
-              <%= image_tag(response.image_url, class: "img-circle") %>
-            </div>
-          <% end %>
-        </div>
-        <div class="row">
-          <% @yelp_responses.each do |response| %>
-            <div class="col-md-3">
-              <%= image_tag(response.rating_img_url) %>
-            </div>
-          <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <h2>Check out the area!</h2>
+        <div class="panel-body">
+          <iframe width="485" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=<%= @neighborhood_name %>%20san%20francisco%20ca%20best%20shops%20and%20food&key=<%= Rails.application.secrets.google_maps_key %>" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h2 class="text-left">Life Changers:</h2>
-        <ul class="text-left">
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-          <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
-          <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <h2>Check out the area!</h2>
-      <div class="panel-body">
-        <iframe width="485" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=<%= @neighborhood_name %>%20san%20francisco%20ca%20best%20shops%20and%20food&key=<%= Rails.application.secrets.google_maps_key %>" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-</div

@@ -1,3 +1,7 @@
+#commute-table th, #commute-table td {
+  text-align: center
+}
+
 #search-bar
 {
   margin-top: 5px;
@@ -25,7 +29,7 @@ p, div {
 }
 
 body {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
@@ -94,6 +98,42 @@ body {
     margin-top: 0;
 }
 
+///////////// FOOTER
+.footer-text {
+  color: #eee;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, .6);
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+footer {
+  margin-top: 20px;
+  // background-color: #f0ad4e;
+}
+
+/////////////// survey
+
+#survey-table {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  border-bottom-right-radius: 40px;
+
+  td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  img {
+    width: 100%;
+    cover: cover;
+  }
+}
+
+
+///////////////////////
+
+
+
 IMG.displayed {
   display: block;
   margin-left: auto;
@@ -103,9 +143,7 @@ IMG.displayed {
 
 #body-wrap {
   text-align: center;
-  margin-right: 10%;
-  margin-left: 0px;
-  
+
 }
 
 #new_user {
@@ -291,4 +329,12 @@ footer {
 
 .most-important-text{
   margin-left:15px;
+}
+
+.card-title {
+  font-size:20px;
+}
+
+.card-text {
+  font-size:15px;
 }

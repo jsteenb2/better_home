@@ -20,13 +20,14 @@ class SearchesController < ApplicationController
     @neighborhoods = get_region_children
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
-    @names_coordinates_json = @names_coordinates.first(15).to_json
+    @names_coordinates_json = @names_coordinates.to_json
     # get_distances
 
     # gruff_zestimates_image
     # gruff_coordinates_image
     build_neighbor_packages
     sort_by_overall_score
+    @neighborhood_container = @neighborhood_container.paginate(page: params[:page], per_page: 10)
   end
 
   private
@@ -68,27 +69,6 @@ class SearchesController < ApplicationController
                   :transit_score,
                   :commute_score,
                   :walk_score )
-    end
-
-    def get_coords
-      @client.coords
-    end
-
-    def get_coords
-      @client.coords
-    end
-
-    def prep_gruff
-      @gruff = GruffPie.new
-    end
-
-    def gruff_zestimates_image
-      prep_gruff
-      @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(5).each do |result|
-        @gruff.set_data(result[:name],result[:zestimate].to_i)
-      end
-      @gruff.write("zestimates_image.png")
     end
 
     def get_coords

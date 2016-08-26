@@ -10,7 +10,8 @@ gem 'factual-api'
 gem 'yelp', require: 'yelp'
 gem 'letter_opener'
 gem 'soda-ruby', require: 'soda'
-gem 'gruff', require: 'gruff'
+gem 'will_paginate'
+#gem 'gruff', require: 'gruff'
 
 # gmaps + dependencies
 gem 'gmaps4rails'
