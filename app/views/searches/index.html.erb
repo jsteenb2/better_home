@@ -80,6 +80,25 @@ function initMap() {
         }
       })(marker, i));
     }
+
+    var image = {
+      'http://maps.google.com/mapfiles/kml/paddle/wht-stars.png'
+    }
+    var marker = new google.maps.Marker({
+      // position: new google.maps.LatLng(position[0],position[1]),
+      position: formattedUserCoords,
+      map: map,
+      title: 'User location'
+      image: 
+    });
+
+    // Add on-click event for the marker.
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infoWindow.setContent(neighborhoodCoordinates[i].name);
+        infoWindow.open(map, marker);
+      }
+    })(marker, i));
 }
 
 initMap()

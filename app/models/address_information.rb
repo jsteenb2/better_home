@@ -100,7 +100,6 @@ class AddressInformation
   end
 
   def neighborhood_population_ratio(neighborhood)
-    binding.pry if @@neighborhood_population[neighborhood].nil?
     @@neighborhood_population[neighborhood] / @@total_population
   end
 
