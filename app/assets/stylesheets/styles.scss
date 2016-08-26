@@ -268,3 +268,24 @@ footer {
 .btn-google:hover {
     color: #dd4b39;
 }
+
+.survey-picture {
+  margin-top:25px;
+  width:400px;
+  height:550px;
+}
+
+.number-score{
+  transition: background-color 0.5s ease;
+  &:hover {
+    background-color:#D3D3D3
+  }
+}
+
+.survey-question {
+  font-size:20px;
+}
+
+.most-important-text{
+  margin-left:15px;
+}
