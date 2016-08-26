@@ -6,7 +6,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-1">
     <div class="row vertical-align">
       <div class="col-md-9 col-md-offset-3">
         <div class="page-header text-center">
@@ -43,7 +43,7 @@ function initMap() {
     // User's coordinates.
     var userCoords = <%= @coords.to_json.html_safe %>;
     var formattedUserCoords = {
-      lat: parseFloat(userCoords.lat), 
+      lat: parseFloat(userCoords.lat),
       lng: parseFloat(userCoords.lon)
     }
 
