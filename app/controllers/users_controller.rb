@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(id)
   end
 
+
   private
     def white_listed_survey_params
       params.require(:user)
