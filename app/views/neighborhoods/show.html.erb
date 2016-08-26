@@ -6,20 +6,25 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
-            <%= content_tag(:h4, "Crime Score: #{@crime}", class: "text-left") if @crime %>
-            <%= content_tag(:h4, "Average Cost: #{@avg_cost}", class: "text-left") if @avg_cost %>
-            <h4 class="text-left">Average Commute</h4>
+            <%= image_tag("/commute_icon.png", style: "width: 25%; margin-top: 10px;") if @distance %>
+            <h4 class="text-left">Commute</h4>
             <ul class="text-left">
               <li><%= get_commute(@distance, 3.1) %> mins by foot</li>
               <li><%= get_commute(@distance, 9.6) %> mins by bike</li>
               <li><%= get_commute(@distance, 20) %> mins by car</li>
             </ul>
+            <%= image_tag("/cost_icon.png", style: "width: 25%; margin-top: 15px;") if @avg_cost %>
+            <%= content_tag(:h4, "Cost: $#{@avg_cost}") if @avg_cost %>
           </div>
           <div class="col-md-6">
-            <h4><%= image_tag(@walkscore['logo_url']) %> <%= @walkscore['walkscore'] %></h4>
+            <h4>
+            <%= image_tag("/walk_icon.png", style: "width: 25%;") %><br><%= image_tag(@walkscore['logo_url']) %> <%= @walkscore['walkscore'] %></h4>
             <%= link_to("More Info", @walkscore['ws_link']) %>
-            <h4><%= image_tag(@transitscore['logo_url']) %> <%= @transitscore['transit_score'] %></h4>
+            <h4><%= image_tag("/public_icon.png", style: "width: 25%;") %><br><%= image_tag(@transitscore['logo_url']) %> <%= @transitscore['transit_score'] %></h4>
             <%= link_to("More Info", @transitscore['ws_link']) %>
+            <h4><%= image_tag("/crime_icon.png", style: "width: 25%;") if @crime %>
+            </h4>
+            <%= content_tag(:h4, "Crime Score: #{@crime}") if @crime %>
           </div>
         </div>
       </div>
@@ -76,4 +81,4 @@
     </div>
   </div>
 </div>
-</div>
+</div>xw
