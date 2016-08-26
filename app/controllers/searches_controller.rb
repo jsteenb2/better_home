@@ -27,6 +27,7 @@ class SearchesController < ApplicationController
     # gruff_coordinates_image
     build_neighbor_packages
     sort_by_overall_score
+    @neighborhood_container = @neighborhood_container.paginate(page: params[:page], per_page: 10)
   end
 
   private
