@@ -29,6 +29,9 @@ neighborhoods.each do |neighborhood|
   Score.create(neighborhood: neighborhood, eviction_score: @addressinformation.eviction_score(neighborhood, 2015), fire_safety_score: @addressinformation.fire_safety_score(neighborhood, 2015), crime_score: @addressinformation.crime_score(neighborhood, 2015), fire_incidents_score: @addressinformation.fire_incidents_score(neighborhood, 2015), traffic_score: @addressinformation.traffic_violations_score(neighborhood, 2015))
 end
 
+# find score by neighborhood name
+# update scores
+
 ### Total list of neighborhoods in san francisco
 neighborhoods = [
      "Mission",
