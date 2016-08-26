@@ -10,6 +10,9 @@ class SearchesController < ApplicationController
     redirect_to searches_path
   end
 
+
+
+
   def index
     @location = grab_ll
     @coords = { lat: @location.lat, lon: @location.lng }
@@ -82,7 +85,7 @@ class SearchesController < ApplicationController
     def gruff_zestimates_image
       prep_gruff
       @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(15).each do |result|
+      @names_zestimates.first(5).each do |result|
         @gruff.set_data(result[:name],result[:zestimate].to_i)
       end
       @gruff.write("zestimates_image.png")
@@ -99,7 +102,7 @@ class SearchesController < ApplicationController
     def gruff_zestimates_image
       prep_gruff
       @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(15).each do |result|
+      @names_zestimates.first(5).each do |result|
         @gruff.set_data(result[:name],result[:zestimate].to_i)
       end
       @gruff.write("zestimates_image.png")
@@ -123,7 +126,7 @@ class SearchesController < ApplicationController
     def build_neighbor_packages
       @neighborhood_container = []
       #..number of neighbohoods
-      @neighborhoods[0..14].each_with_index do |neighbor,i|
+      @neighborhoods[0..4].each_with_index do |neighbor,i|
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
         hood_hash = get_zillow_stuff(neighbor, hood_hash, i)
