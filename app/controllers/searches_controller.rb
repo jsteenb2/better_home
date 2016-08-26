@@ -10,6 +10,9 @@ class SearchesController < ApplicationController
     redirect_to searches_path
   end
 
+
+
+
   def index
     @location = grab_ll
     @coords = { lat: @location.lat, lon: @location.lng }
@@ -18,8 +21,8 @@ class SearchesController < ApplicationController
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
     @names_coordinates_json = @names_coordinates.first(15).to_json
-    get_distances
-    
+    # get_distances
+
     # gruff_zestimates_image
     # gruff_coordinates_image
     build_neighbor_packages
@@ -30,7 +33,7 @@ class SearchesController < ApplicationController
     def get_distances
       start = @location
       Geokit::Geocoders::GoogleGeocoder.api_key = Rails.application.secrets.google_maps_key
-      @distances = @names_coordinates.first(15).map do |result|
+      @distances = @names_coordinates.map do |result|
         # computing for distance from user
 
         end_point = Geokit::Geocoders::GoogleGeocoder.geocode("#{result[:name]} san francisco ca")
@@ -82,7 +85,7 @@ class SearchesController < ApplicationController
     def gruff_zestimates_image
       prep_gruff
       @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(15).each do |result|
+      @names_zestimates.first(5).each do |result|
         @gruff.set_data(result[:name],result[:zestimate].to_i)
       end
       @gruff.write("zestimates_image.png")
@@ -99,7 +102,7 @@ class SearchesController < ApplicationController
     def gruff_zestimates_image
       prep_gruff
       @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(15).each do |result|
+      @names_zestimates.first(5).each do |result|
         @gruff.set_data(result[:name],result[:zestimate].to_i)
       end
       @gruff.write("zestimates_image.png")
@@ -123,23 +126,14 @@ class SearchesController < ApplicationController
     def build_neighbor_packages
       @neighborhood_container = []
       #..number of neighbohoods
-      @neighborhoods[0..14].each_with_index do |neighbor,i|
+
+      @neighborhoods.each_with_index do |neighbor,i|
         hood_hash = {}
-        hood_hash = get_walkscore_stuff(neighbor, hood_hash)
+        hood_hash = database_fill(neighbor, hood_hash)
         hood_hash = get_zillow_stuff(neighbor, hood_hash, i)
-        hood_hash = add_crime_score(neighbor, hood_hash)
         hood_hash = add_overall_score(neighbor, hood_hash)
         @neighborhood_container << hood_hash
       end
-    end
-
-    def add_crime_score(neighbor,hash)
-      if neighborhood = Score.find_by_neighborhood(neighbor['name'])
-        hash['crime_score'] = neighborhood.crime_score
-      else
-        hash['crime_score'] = 3
-      end
-      hash
     end
 
     def add_overall_score(neighbor,hash)
@@ -147,14 +141,23 @@ class SearchesController < ApplicationController
       hash
     end
 
-    def get_walkscore_stuff(neighbor, hash)
-      walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
-      transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
+    def database_fill(neighbor, hash)
+      score = Score.find_by_neighborhood(neighbor["name"].downcase)
       hash["name"] = neighbor["name"]
-      hash["walk_score"] = walk["walkscore"]
+      hash["walk_score"] = score.walk_score
+      hash["transit_score"] = score.transit_score
+      hash["eviction_score"] = score.eviction_score
+      hash
+    end
+
+    def get_walkscore_stuff(neighbor, hash)
+      # walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
+      # transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
+      hash["name"] = neighbor["name"]
+      hash["walk_score"] = Score.find_by_neighborhood(neighbor["name"]).pluck()
       hash["transit_score"] = transit["transit_score"]
-      hash["walk_description"] = walk["description"]
-      hash["transit_description"] = transit["summary"]
+      # hash["walk_description"] = walk["description"]
+      # hash["transit_description"] = transit["summary"]
       hash
     end
 
@@ -164,7 +167,7 @@ class SearchesController < ApplicationController
       end
       hash["lat"] = neighbor["latitude"]
       hash["long"] = neighbor["longitude"]
-      hash["distance_from_poi"] = @distances[idx]
+      hash["distance_from_poi"] = GeoHaverDistance.new( @coords[:lat], @coords[:lon], neighbor["latitude"].to_f, neighbor["longitude"].to_f ).distance_mi
       hash
     end
 
