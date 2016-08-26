@@ -3,12 +3,12 @@ require 'date'
 class AddressInformation
   attr_reader :client
 
-  @@neighborhood_to_pd = {"Mission" => "Mission", "Bernal Heights" => "Ingleside", "Central Richmind" => "Richmond", "Excelsior" => "Ingleside", "Bayview" => "Bayview", "Central Sunset" => "Taraval", "Downtown" => "Tenderloin", "Pacific Heights" => "Northern", "Nob Hill" => "Central", "Visitacion Valley" => "Ingleside", "Parkside" => "Taraval", "Inner Richmond" => "Richmond", "South of Market" => "Southern", "Tenderloin" => "Tenderloin", "Noe Valley" => "Ingleside", "Inner Sunset" => "Taraval", "Outer Sunset" => "Taraval", "Portola" => "Bayview", "Russian Hill" => "Central", "Outer Parkside" => "Taraval"}
+  @@neighborhood_to_pd = {"mission" => "mission", "bernal heights" => "ingleside", "central richmind" => "richmond", "excelsior" => "ingleside", "bayview" => "bayview", "central sunset" => "taraval", "downtown" => "tenderloin", "pacific heights" => "northern", "nob hill" => "central", "visitacion valley" => "ingleside", "parkside" => "taraval", "inner richmond" => "richmond", "south of market" => "southern", "tenderloin" => "tenderloin", "noe valley" => "ingleside", "inner sunset" => "taraval", "outer sunset" => "taraval", "portola" => "bayview", "russian hill" => "central", "outer parkside" => "taraval"}
 
   #Population for 2008 census
-  @@neighborhood_population = {"Mission" => 47234, "Bernal Heights" => 24824, "Central Richmind" =>   59297, "Excelsior" => 23823, "Bayview" => 35890, "Central Sunset" => 21791, "Downtown" => 38728, "Pacific Heights" => 23545, "Nob Hill" => 20388, "Visitacion Valley" =>  22534 , "Parkside" => 27640, "Inner Richmond" => 38939, "South of Market" => 23016, "Tenderloin" => 25067, "Noe Valley" => 21106, "Inner Sunset" => 38892, "Outer Sunset" =>  77431, "Portola" => 12760, "Russian Hill" => 56322, "Outer Parkside" => 14334}
+  @@neighborhood_population = {"mission" => 47234, "bernal heights" => 24824, "central richmind" =>   59297, "excelsior" => 23823, "bayview" => 35890, "central sunset" => 21791, "downtown" => 38728, "pacific heights" => 23545, "nob hill" => 20388, "visitacion valley" =>  22534, "parkside" => 27640, "inner richmond" => 38939, "south of market" => 23016, "tenderloin" => 25067, "noe valley" => 21106, "inner sunset" => 38892, "outer sunset" =>  77431, "portola" => 12760, "russian hill" => 56322, "outer parkside" => 14334}
 
-  @@police_population = {"Mission" => 47234 / 653561.0 , "Ingleside" => (24824 + 23823 + 22534 + 21106) / 653561.0, "Richmond" =>  (59297 + 38939) / 653561.0, "Bayview" => (35890 + 12760) / 653561.0, "Taraval" => (27640 + 38892 + 77431 + 14334 + 21791) / 653561.0, "Central" => (56322 + 20388) / 653561.0, "Tenderloin" => (38728 + 25067) / 653561.0, "Southern" => 23016 / 653561.0, "Northern" => 23545 / 653561.0}
+  @@police_population = {"mission" => 47234 / 653561.0 , "ingleside" => (24824 + 23823 + 22534 + 21106) / 653561.0, "richmond" =>  (59297 + 38939) / 653561.0, "bayview" => (35890 + 12760) / 653561.0, "taraval" => (27640 + 38892 + 77431 + 14334 + 21791) / 653561.0, "central" => (56322 + 20388) / 653561.0, "tenderloin" => (38728 + 25067) / 653561.0, "southern" => 23016 / 653561.0, "northern" => 23545 / 653561.0}
 
   @@total_population = 653561.0
 
@@ -24,7 +24,7 @@ class AddressInformation
     zipcode = zipcode.to_s
     client.get("93gi-sfd2", {
       "$select" => "count(neighborhood) as neighborhood_evictions",
-      "$where" =>  "neighborhood like '#{neighborhood}' and date_trunc_y(file_date) between '#{year}' and '2015'",
+      "$where" =>  "lower(neighborhood) like '#{neighborhood.downcase}' and date_trunc_y(file_date) between '#{year}' and '2015'",
       "$group" => "neighborhood"
       })
   end
@@ -85,16 +85,16 @@ class AddressInformation
       })
   end
 
-  # def traffic_incidents_in(neighborhood, year)
-  #   client.get("vv57-2fgy", {
-  #     "$select" => "count(incidntnum) as traffic_incidents",
-  #     "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) between '#{year}' and '2015'"
-  #     })
-  # end
+  def traffic_incidents_in(neighborhood, year)
+    client.get("cuks-n6tp", {
+      "$select" => "count(descript) as traffic_incidents",
+      "$where" => "lower(pddistrict) like '#{convert_to_station(neighborhood).downcase}' and date_trunc_y(date) = '2015'"
+      })
+  end
 
   def total_traffic_incidents
     client.get("cuks-n6tp", {
-      "$select" => "descript",
+      "$select" => "count(descript)",
       "$where" => "date_trunc_y(date) = '2015'"
       })
   end
@@ -109,6 +109,7 @@ class AddressInformation
 
 
   def eviction_score(neighborhood, year)
+    return 2 if eviction_notices_in(neighborhood, year) == []
     score = ((eviction_notices_in(neighborhood, year).first.first[1].to_i.to_f / total_eviction_notices.first.first[1].to_i) / neighborhood_population_ratio(neighborhood)) * 2.5
     if score >= 5.0
       5
@@ -116,7 +117,6 @@ class AddressInformation
       score.round
     end
   end
-
 
   def fire_safety_score(neighborhood, year)
     score = ((firesafety_complaints_in(neighborhood, year).first.first[1].to_i.to_f / total_firesafety_complaints.first.first[1].to_i) / neighborhood_population_ratio(neighborhood)) * 2.5
@@ -126,7 +126,6 @@ class AddressInformation
       score.round
     end
   end
-
 
   def crime_score(neighborhood, year)
     score = ((crime_in_neighborhood(neighborhood, year).first.first[1].to_i.to_f / total_crime.first.first[1].to_i) / police_population_ratio(neighborhood)) * 2.5
@@ -146,9 +145,12 @@ class AddressInformation
     end
   end
 
-  def traffic_violations_score
-
-
+  def traffic_violations_score(neighborhood, year)
+    score = ((traffic_incidents_in(neighborhood, year).first.first[1].to_i.to_f / total_traffic_incidents.first.first[1].to_i) / police_population_ratio(neighborhood)) * 2.5
+    if score >= 5.0
+      5
+    else
+      score.round
+    end
   end
-
 end

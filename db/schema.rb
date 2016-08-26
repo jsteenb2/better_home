@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825185500) do
+ActiveRecord::Schema.define(version: 20160826010934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,20 @@ ActiveRecord::Schema.define(version: 20160825185500) do
     t.string   "longitude"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.string   "neighborhood"
+    t.integer  "eviction_score"
+    t.integer  "fire_safety_score"
+    t.integer  "crime_score"
+    t.integer  "fire_incidents_score"
+    t.integer  "traffic_score"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "walk_score"
+    t.integer  "transit_score"
+    t.index ["neighborhood"], name: "index_scores_on_neighborhood", using: :btree
   end
 
   create_table "states", force: :cascade do |t|
