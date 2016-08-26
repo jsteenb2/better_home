@@ -61,11 +61,10 @@ class ApplicationController < ActionController::Base
     end
 
     def walkscore_factor(scale, score)
-      (scale - 1) * ( 5 - (score/20.0).ceil)
+      (scale - 1) * score
     end
 
     def transit_factor(scale, score)
-      return
-      (scale - 1) * ( 5 - (score/20.0).ceil)
+      (scale - 1) * score
     end
 end
