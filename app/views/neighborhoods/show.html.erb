@@ -1,11 +1,12 @@
+<div id="body-wrap">
 <h1 style="margin-top: -20px; margin-bottom: 20px;"><strong><%= @neighborhood_name %></strong></h1>
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
-      <h2>PUT TRANSIT AND WALKSCORE IMG HERE</h2>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
+            <%= content_tag(:h4, "Crime Score: #{@crime}", class: "text-left") if @crime %>
             <%= content_tag(:h4, "Average Cost: #{@avg_cost}", class: "text-left") if @avg_cost %>
             <h4 class="text-left">Average Commute</h4>
             <ul class="text-left">
@@ -15,8 +16,10 @@
             </ul>
           </div>
           <div class="col-md-6">
-            <h4 class="text-left">Public Transit Nearby: list list list list list list list</h4>
-            <h4 class="text-left">How walkable? This is where we will put walkscore description</h4>
+            <h4><%= image_tag(@walkscore['logo_url']) %> <%= @walkscore['walkscore'] %></h4>
+            <%= link_to("More Info", @walkscore['ws_link']) %>
+            <h4><%= image_tag(@transitscore['logo_url']) %> <%= @transitscore['transit_score'] %></h4>
+            <%= link_to("More Info", @transitscore['ws_link']) %>
           </div>
         </div>
       </div>
@@ -55,13 +58,12 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-body">
-        <h2 class="text-left">Life Changers:</h2>
-        <ul class="text-left">
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-          <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
-          <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-        </ul>
+        <h2 class="text-left">Things to Consider:</h2>
+        <h4 class="text-left">This neighborhood has <strong><%= @transitscore['summary'] %></strong></h4>
+        <h4 class="text-left">This neighborhood is <strong><%= @walkscore['description'] %></strong></h4>
+        <h4 class="text-left">There are <strong><%= @factual['347'] %></strong> resturants nearby</h4>
+        <h4 class="text-left">There are <strong><%= @factual['34'] %></strong> schools nearby nearby</h4>
+        <h4 class="text-left">There are <strong><%= @factual['177'] %></strong> businesses nearby nearby</h4>
       </div>
     </div>
   </div>
@@ -73,4 +75,5 @@
       </div>
     </div>
   </div>
-</div
+</div>
+</div>
