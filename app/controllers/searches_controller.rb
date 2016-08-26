@@ -19,6 +19,7 @@ class SearchesController < ApplicationController
     @names_coordinates = @client.coordinates
     @names_coordinates_json = @names_coordinates.first(15).to_json
     get_distances
+    
     # gruff_zestimates_image
     # gruff_coordinates_image
     build_neighbor_packages
@@ -121,6 +122,7 @@ class SearchesController < ApplicationController
 
     def build_neighbor_packages
       @neighborhood_container = []
+      #..number of neighbohoods
       @neighborhoods[0..14].each_with_index do |neighbor,i|
         hood_hash = {}
         hood_hash = get_walkscore_stuff(neighbor, hood_hash)
@@ -135,7 +137,7 @@ class SearchesController < ApplicationController
       if neighborhood = Score.find_by_neighborhood(neighbor['name'])
         hash['crime_score'] = neighborhood.crime_score
       else
-        hash['crime_score'] = 2
+        hash['crime_score'] = 3
       end
       hash
     end
@@ -148,8 +150,6 @@ class SearchesController < ApplicationController
     def get_walkscore_stuff(neighbor, hash)
       walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
       transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
-      # walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
-      # transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
       hash["name"] = neighbor["name"]
       hash["walk_score"] = walk["walkscore"]
       hash["transit_score"] = transit["transit_score"]
