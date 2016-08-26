@@ -1,86 +1,88 @@
-<div class="row">
-  <div class="col-md-6" >
-    <div class="row">
-      <div class="map-sidebar">
-        <div id="map"></div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-5 col-md-offset-1">
-    <div class="row vertical-align">
-      <div class="col-md-9 col-md-offset-3">
-        <div class="page-header text-center">
-         <h1>Neighborhoods for you</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6" >
+      <div class="row">
+        <div class="map-sidebar">
+          <div id="map">dsfds</div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-3">
-        <%# 5.times do |index| %>
-          <%#= render'shared/static_panel' %>
-        <%# end %>
+    <div class="col-md-5">
+      <div class="row vertical-align">
+        <div class="col-md-9 col-md-offset-4">
+          <div class="page-header text-center">
+           <h1>Neighborhoods for you</h1>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-3">
-        <% @neighborhood_container[0..2].each_with_index do |result, index| %>
-          <%= render partial: 'shared/top_three_result_panel', locals: { neighborhood: result, num: (index) } %>
-        <% end %>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-3">
+          <%# 5.times do |index| %>
+            <%#= render'shared/static_panel' %>
+          <%# end %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-3">
-        <% @neighborhood_container[3..-1].each do |result| %>
-          <%= render partial: 'shared/result_panel', locals: { neighborhood: result } %>
-        <% end %>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-3">
+          <% @neighborhood_container[0..2].each_with_index do |result, index| %>
+            <%= render partial: 'shared/top_three_result_panel', locals: { neighborhood: result, num: (index) } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-3">
+          <% @neighborhood_container[3..-1].each do |result| %>
+            <%= render partial: 'shared/result_panel', locals: { neighborhood: result } %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<div class="col-md-9 col-md-offset-3">
+  <script class= "col-md-9 col-md-offset-3">
+  function initMap() {
+      // User's coordinates.
+      var userCoords = <%= @coords.to_json.html_safe %>;
+      var formattedUserCoords = {
+        lat: parseFloat(userCoords.lat),
+        lng: parseFloat(userCoords.lon)
+      }
 
-<script>
-function initMap() {
-    // User's coordinates.
-    var userCoords = <%= @coords.to_json.html_safe %>;
-    var formattedUserCoords = {
-      lat: parseFloat(userCoords.lat),
-      lng: parseFloat(userCoords.lon)
-    }
+      // Neighborhood coordinates.
+      var neighborhoodCoordinates = <%= @names_coordinates_json.html_safe %>
+      var formattedCoordinates = neighborhoodCoordinates.map (function(obj) {
+        return {name: obj.name, lat: parseFloat(obj.coords.lat), lng: parseFloat(obj.coords.lon)}
+      })
 
-    // Neighborhood coordinates.
-    var neighborhoodCoordinates = <%= @names_coordinates_json.html_safe %>
-    var formattedCoordinates = neighborhoodCoordinates.map (function(obj) {
-      return {name: obj.name, lat: parseFloat(obj.coords.lat), lng: parseFloat(obj.coords.lon)}
-    })
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: formattedUserCoords,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-
-    // Making multiple markers.
-    var infoWindow = new google.maps.InfoWindow();
-
-    for(var i=0; i < formattedCoordinates.length; i++) {
-
-      // Create a marker.
-      var marker = new google.maps.Marker({
-        // position: new google.maps.LatLng(position[0],position[1]),
-        position: formattedCoordinates[i],
-        map: map,
-        title: 'Coordinate number ' + i.toString()
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: formattedUserCoords,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
-      // Add on-click event for the marker.
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infoWindow.setContent(neighborhoodCoordinates[i].name);
-          infoWindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-}
+      // Making multiple markers.
+      var infoWindow = new google.maps.InfoWindow();
 
-initMap()
-</script>
+      for(var i=0; i < formattedCoordinates.length; i++) {
+
+        // Create a marker.
+        var marker = new google.maps.Marker({
+          // position: new google.maps.LatLng(position[0],position[1]),
+          position: formattedCoordinates[i],
+          map: map,
+          title: 'Coordinate number ' + i.toString()
+        });
+
+        // Add on-click event for the marker.
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infoWindow.setContent(neighborhoodCoordinates[i].name);
+            infoWindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+  }
+
+  initMap()
+  </script>
+</div>
