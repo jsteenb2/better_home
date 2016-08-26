@@ -18,6 +18,7 @@ class WalkscoreMain
   private
 
     def self.get_address(neighborhood)
+      Geokit::Geocoders::GoogleGeocoder.api_key = Rails.application.secrets.google_maps_key
       Geokit::Geocoders::GoogleGeocoder.geocode neighborhood
       #Geokit::Geocoders::GoogleGeocoder.geocode geocoded
     end
@@ -68,6 +69,7 @@ class WalkscoreMain
     end
 
     def self.get_lat_long(address, hash)
+      Geokit::Geocoders::GoogleGeocoder.api_key = Rails.application.secrets.google_maps_key
       geocoded = Geokit::Geocoders::GoogleGeocoder.geocode address
       hash["lat"], hash["lon"] = geocoded.latitude, geocoded.longitude
       hash
