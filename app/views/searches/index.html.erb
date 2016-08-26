@@ -36,6 +36,7 @@
   </div>
 <div class="col-md-9 col-md-offset-3">
   <script class= "col-md-9 col-md-offset-3">
+    'use strict';
     function initMap() {
         // User's coordinates.
         var userCoords = <%= @coords.to_json.html_safe %>;
@@ -60,6 +61,8 @@
         // Making multiple markers.
         var infoWindow = new google.maps.InfoWindow();
 
+        var markers = [];
+
         for(var i=0; i < formattedCoordinates.length; i++) {
 
           // Create a marker.
@@ -77,6 +80,36 @@
             }
           })(marker, i));
 
+          markers.push(marker)
+
+        }
+
+        // Adding events to each card div.
+        var cardDivs = document.getElementsByClassName('card');
+
+        for(var i=0; i < cardDivs.length; i++) {
+          // Function to add an event to each card div.
+          function divCardEvent() {
+            // Need to give this inner anonymous function a copy
+            // of i (as j) because, as a closure, it memorizes
+            // the environment in which it is declared.
+            (function(j) {
+              // Find the marker whose title matches the card's id.
+              var matchingMarker = markers.find(function(marker) {
+                return marker.title == cardDivs[j].id;
+              });
+              // The top 3 cards don't have a marker for some reason.
+              if (matchingMarker) {
+                cardDivs[j].addEventListener('click', function() {
+                  // Google Maps markers need this method call instead of
+                  // marker.click().
+                  google.maps.event.trigger(matchingMarker, 'click');
+                });
+              }
+            })(i);
+          }
+
+          divCardEvent();
         }
 
         // Make the user's marker.
