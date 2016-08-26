@@ -102,17 +102,16 @@ task :update_db => :environment do
      "Golden Gate Park"
   ].map(&:downcase)
 
-  puts "Updating database.."
+    puts "Updating database.."
 
-  neighborhoods.each do |neighborhood|
-    if score_update = Score.find_by_neighborhood(neighborhood)
-      walkscore_hash = get_walkscore_stuff(neighborhood)
-      score_update = Score.find_by_neighborhood(neighborhood)
-      walkscore_hash["walk_score"] = 2 unless walkscore_hash["walk_score"]
-      walkscore_hash["transit_score"] = 2 unless walkscore_hash["transit_score"]
-      score_update.update!(walk_score: walkscore_hash["walk_score"],transit_score: walkscore_hash["transit_score"])
+    @addressinformation = AddressInformation.new
+
+    Score.destroy_all
+    
+    neighborhoods.each do |neighborhood|
+      Score.create(neighborhood: neighborhood, eviction_score: @addressinformation.eviction_score(neighborhood, 2015), fire_safety_score: @addressinformation.fire_safety_score(neighborhood, 2015), crime_score: @addressinformation.crime_score(neighborhood, 2015), fire_incidents_score: @addressinformation.fire_incidents_score(neighborhood, 2015), traffic_score: @addressinformation.traffic_violations_score(neighborhood, 2015))
+      puts "Done with neighborhood..."
     end
-  end
 
   puts "Update complete."
 end
