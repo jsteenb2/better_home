@@ -100,18 +100,18 @@ task :update_db => :environment do
      "Balboa Terrace",
      "Clarendon Heights",
      "Golden Gate Park"
-].map(&:downcase)
+  ].map(&:downcase)
 
   puts "Updating database.."
 
   neighborhoods.each do |neighborhood|
-  if score_update = Score.find_by_neighborhood(neighborhood)
-    walkscore_hash = get_walkscore_stuff(neighborhood)
-    score_update = Score.find_by_neighborhood(neighborhood)
-    walkscore_hash["walk_score"] = 2 unless walkscore_hash["walk_score"]
-    walkscore_hash["transit_score"] = 2 unless walkscore_hash["transit_score"]
-    score_update.update!( walk_score: walkscore_hash["walk_score"],
-                         transit_score: walkscore_hash["transit_score"]
+    if score_update = Score.find_by_neighborhood(neighborhood)
+      walkscore_hash = get_walkscore_stuff(neighborhood)
+      score_update = Score.find_by_neighborhood(neighborhood)
+      walkscore_hash["walk_score"] = 2 unless walkscore_hash["walk_score"]
+      walkscore_hash["transit_score"] = 2 unless walkscore_hash["transit_score"]
+      score_update.update!(walk_score: walkscore_hash["walk_score"],transit_score: walkscore_hash["transit_score"])
+    end
   end
 
   puts "Update complete."
