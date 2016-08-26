@@ -37,7 +37,7 @@
         <div class="row">
           <% @yelp_responses.each do |response| %>
             <div class="col-md-3">
-              <%= image_tag(response.image_url, class: "img-circle") %>
+              <%= link_to(image_tag(response.image_url, class: "img-circle"), response.url) %>
             </div>
           <% end %>
         </div>
