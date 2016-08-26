@@ -81,24 +81,23 @@ function initMap() {
       })(marker, i));
     }
 
-    var image = {
-      'http://maps.google.com/mapfiles/kml/paddle/wht-stars.png'
-    }
-    var marker = new google.maps.Marker({
+    var image = 'http://maps.google.com/mapfiles/kml/paddle/wht-stars.png'
+
+    var userMarker = new google.maps.Marker({
       // position: new google.maps.LatLng(position[0],position[1]),
       position: formattedUserCoords,
       map: map,
-      title: 'User location'
-      image: 
+      // title: 'User location',
+      icon: image
     });
 
     // Add on-click event for the marker.
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      return function() {
-        infoWindow.setContent(neighborhoodCoordinates[i].name);
-        infoWindow.open(map, marker);
-      }
-    })(marker, i));
+    // google.maps.event.addListener(userMarker, 'click', (function(marker) {
+    //   return function() {
+    //     infoWindow.setContent('User location');
+    //     infoWindow.open(map, marker);
+    //   }
+    // })(userMarker);
 }
 
 initMap()
