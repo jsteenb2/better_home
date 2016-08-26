@@ -59,6 +59,10 @@ The Yelp api synchronizes with the factual results and provides our user a very 
 
 Demographic information for each neighborhood was obtained using the Socrata API. The data is obtained, then the necessary mathematical manipulation was added.
 
+###III. User Experience
+
+Used Devise and Omniauth gems to set up user accounts, email confirmation, and login via facebook, twitter, or google.
+
 ###Optimzations
 
 User experience was initially very bad as a number of API calls were being made each time a results page was initiated. A number of API were completely eliminated by cacheing some API calls.  We also eliminated a large chunk of API calls by writing our own haversine script to calculate distance between lat and lon coordinates.  This eliminated about 180 API calls!  With the constant speed of the haversine formula and the caching of part of our API calls we are able to give the user a very speedy response.
