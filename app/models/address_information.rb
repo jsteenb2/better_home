@@ -3,10 +3,10 @@ require 'date'
 class AddressInformation
   attr_reader :client
 
-  @@neighborhood_to_pd = {"mission" => "mission", "bernal heights" => "ingleside", "central richmind" => "richmond", "excelsior" => "ingleside", "bayview" => "bayview", "central sunset" => "taraval", "downtown" => "tenderloin", "pacific heights" => "northern", "nob hill" => "central", "visitacion valley" => "ingleside", "parkside" => "taraval", "inner richmond" => "richmond", "south of market" => "southern", "tenderloin" => "tenderloin", "noe valley" => "ingleside", "inner sunset" => "taraval", "outer sunset" => "taraval", "portola" => "bayview", "russian hill" => "central", "outer parkside" => "taraval"}
+  @@neighborhood_to_pd = {"mission" => "mission", "bernal heights" => "ingleside", "central richmond" => "richmond", "excelsior" => "ingleside", "bayview" => "bayview", "central sunset" => "taraval", "downtown" => "tenderloin", "pacific heights" => "northern", "nob hill" => "central", "visitacion valley" => "ingleside", "parkside" => "taraval", "inner richmond" => "richmond", "south of market" => "southern", "tenderloin" => "tenderloin", "noe valley" => "ingleside", "inner sunset" => "taraval", "outer sunset" => "taraval", "portola" => "bayview", "russian hill" => "central", "outer parkside" => "taraval"}
 
   #Population for 2008 census
-  @@neighborhood_population = {"mission" => 47234, "bernal heights" => 24824, "central richmind" =>   59297, "excelsior" => 23823, "bayview" => 35890, "central sunset" => 21791, "downtown" => 38728, "pacific heights" => 23545, "nob hill" => 20388, "visitacion valley" =>  22534, "parkside" => 27640, "inner richmond" => 38939, "south of market" => 23016, "tenderloin" => 25067, "noe valley" => 21106, "inner sunset" => 38892, "outer sunset" =>  77431, "portola" => 12760, "russian hill" => 56322, "outer parkside" => 14334}
+  @@neighborhood_population = {"mission" => 47234, "bernal heights" => 24824, "central richmond" =>   59297, "excelsior" => 23823, "bayview" => 35890, "central sunset" => 21791, "downtown" => 38728, "pacific heights" => 23545, "nob hill" => 20388, "visitacion valley" =>  22534, "parkside" => 27640, "inner richmond" => 38939, "south of market" => 23016, "tenderloin" => 25067, "noe valley" => 21106, "inner sunset" => 38892, "outer sunset" =>  77431, "portola" => 12760, "russian hill" => 56322, "outer parkside" => 14334}
 
   @@police_population = {"mission" => 47234 / 653561.0 , "ingleside" => (24824 + 23823 + 22534 + 21106) / 653561.0, "richmond" =>  (59297 + 38939) / 653561.0, "bayview" => (35890 + 12760) / 653561.0, "taraval" => (27640 + 38892 + 77431 + 14334 + 21791) / 653561.0, "central" => (56322 + 20388) / 653561.0, "tenderloin" => (38728 + 25067) / 653561.0, "southern" => 23016 / 653561.0, "northern" => 23545 / 653561.0}
 
@@ -100,6 +100,7 @@ class AddressInformation
   end
 
   def neighborhood_population_ratio(neighborhood)
+    binding.pry if @@neighborhood_population[neighborhood].nil?
     @@neighborhood_population[neighborhood] / @@total_population
   end
 
