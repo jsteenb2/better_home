@@ -9,7 +9,7 @@ class NeighborhoodsController < ApplicationController
     @walkscore = WalkscoreMain.get_walkscore("#{data['name']} san francisco ca")
     @transitscore = WalkscoreMain.get_transitscore("#{data['name']} san francisco ca")
     @factual = FactualMain.count_num(data["name"])['category_ids']
-    @crime = data["crime_score"]
+    @crime = data["eviction_score"]
     @distance = data["distance_from_poi"]
   end
 

@@ -64,7 +64,11 @@ class WalkscoreMain
     def self.get_city_state(address)
       hash = {}
       address_params = address.split(" ")
-      hash["city"], hash["state"] = address_params[-3] + '%20' + address_params[-2], address_params[-1]
+      if address_params[-1][0] =~ /[A-Za-z]/
+        hash["city"], hash["state"] = address_params[-3] + '%20' + address_params[-2], address_params[-1]
+      else
+        hash["city"], hash["state"] = address_params[-4] + '%20' + address_params[-3], address_params[-2]
+      end
       hash
     end
 
