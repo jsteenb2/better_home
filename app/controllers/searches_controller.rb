@@ -135,7 +135,7 @@ class SearchesController < ApplicationController
       if neighborhood = Score.find_by_neighborhood(neighbor['name'])
         hash['crime_score'] = neighborhood.crime_score
       else
-        hash['crime_score'] = 2
+        hash['crime_score'] = 3
       end
       hash
     end
@@ -148,8 +148,6 @@ class SearchesController < ApplicationController
     def get_walkscore_stuff(neighbor, hash)
       walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
       transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
-      # walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
-      # transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
       hash["name"] = neighbor["name"]
       hash["walk_score"] = walk["walkscore"]
       hash["transit_score"] = transit["transit_score"]

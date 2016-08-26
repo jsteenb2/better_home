@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def neighborhood_score(user, neighborhood)
     value = 100 -
-      (crime_factor(user.crime_score, neighborhood['crime_score'].to_i) +
+      (crime_factor(user.crime_score, neighborhood['eviction_score'].to_i) +
       cost_factor(user.cost_score, neighborhood['cost_score'].to_i) +
       transit_factor(user.transit_score, neighborhood['transit_score'].to_i) +
       walkscore_factor(user.walk_score, neighborhood['walk_score'].to_i) +
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
     def crime_factor(scale, hood)
-      (scale - 1) * hood
+      (scale - 1) * (  hood )
     end
 
     def commute_factor(scale, distance_from)
@@ -65,6 +65,7 @@ class ApplicationController < ActionController::Base
     end
 
     def transit_factor(scale, score)
+      return
       (scale - 1) * ( 5 - (score/20.0).ceil)
     end
 end
