@@ -126,11 +126,8 @@ class SearchesController < ApplicationController
     def build_neighbor_packages
       @neighborhood_container = []
       #..number of neighbohoods
-<<<<<<< HEAD
-      @neighborhoods[0..4].each_with_index do |neighbor,i|
-=======
+
       @neighborhoods.each_with_index do |neighbor,i|
->>>>>>> ddd75f2fecb6910d67dcd301f90d190c53fa1fb4
         hood_hash = {}
         hood_hash = database_fill(neighbor, hood_hash)
         hood_hash = get_zillow_stuff(neighbor, hood_hash, i)
