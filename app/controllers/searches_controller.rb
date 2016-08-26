@@ -10,9 +10,6 @@ class SearchesController < ApplicationController
     redirect_to searches_path
   end
 
-
-
-
   def index
     @location = grab_ll
     @coords = { lat: @location.lat, lon: @location.lng }
@@ -21,10 +18,6 @@ class SearchesController < ApplicationController
     @names_zestimates = @client.zestimates
     @names_coordinates = @client.coordinates
     @names_coordinates_json = @names_coordinates.to_json
-    # get_distances
-
-    # gruff_zestimates_image
-    # gruff_coordinates_image
     build_neighbor_packages
     sort_by_overall_score
     @neighborhood_container = @neighborhood_container.paginate(page: params[:page], per_page: 10)
@@ -36,12 +29,10 @@ class SearchesController < ApplicationController
       Geokit::Geocoders::GoogleGeocoder.api_key = Rails.application.secrets.google_maps_key
       @distances = @names_coordinates.map do |result|
         # computing for distance from user
-
         end_point = Geokit::Geocoders::GoogleGeocoder.geocode("#{result[:name]} san francisco ca")
         distance_from_user = @location.distance_to(end_point)
       end
     end
-
 
     # Getting neighborhoods.
     def prep_region_children
@@ -102,11 +93,8 @@ class SearchesController < ApplicationController
       @gruff.write("coordinates_image.png")
     end
 
-
     def build_neighbor_packages
       @neighborhood_container = []
-      #..number of neighbohoods
-
       @neighborhoods.each_with_index do |neighbor,i|
         hood_hash = {}
         hood_hash = database_fill(neighbor, hood_hash)
@@ -131,13 +119,9 @@ class SearchesController < ApplicationController
     end
 
     def get_walkscore_stuff(neighbor, hash)
-      # walk = WalkscoreMain.get_walkscore("#{neighbor["name"]} san francisco ca")
-      # transit = WalkscoreMain.get_transitscore("#{neighbor["name"]} san francisco ca")
       hash["name"] = neighbor["name"]
       hash["walk_score"] = Score.find_by_neighborhood(neighbor["name"]).pluck()
       hash["transit_score"] = transit["transit_score"]
-      # hash["walk_description"] = walk["description"]
-      # hash["transit_description"] = transit["summary"]
       hash
     end
 
