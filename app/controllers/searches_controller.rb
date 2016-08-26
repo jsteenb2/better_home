@@ -74,27 +74,6 @@ class SearchesController < ApplicationController
       @client.coords
     end
 
-    def get_coords
-      @client.coords
-    end
-
-    def prep_gruff
-      @gruff = GruffPie.new
-    end
-
-    def gruff_zestimates_image
-      prep_gruff
-      @gruff.title = "Zestimates per neighborhood"
-      @names_zestimates.first(5).each do |result|
-        @gruff.set_data(result[:name],result[:zestimate].to_i)
-      end
-      @gruff.write("zestimates_image.png")
-    end
-
-    def get_coords
-      @client.coords
-    end
-
     def prep_gruff
       @gruff = GruffPie.new
     end
