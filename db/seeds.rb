@@ -8,6 +8,7 @@
 def get_walkscore_stuff(neighbor)
   hash = {}
   walk = WalkscoreMain.get_walkscore("#{neighbor} san francisco ca")
+  
   transit = WalkscoreMain.get_transitscore("#{neighbor} san francisco ca")
   hash["walk_score"] = ( 5 - (walk["walkscore"]/20.0).ceil) if walk["walkscore"]
   hash["transit_score"] = ( 5 - (transit["transit_score"]/20.0).ceil) if transit["transit_score"]
