@@ -15,8 +15,6 @@ Rails.application.routes.draw do
   # get 'search' => 'searches#new'
   get "neighborhood_inspect" => "neighborhoods#show"
 
-
-
   resources :searches
 
   get "/apitest" => "walkscores#show"
