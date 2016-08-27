@@ -85,9 +85,10 @@
         }
 
         // Adding events to each card div.
-        var cardDivs = document.getElementsByClassName('card');
+        var cardImages = document.getElementsByClassName('img-fluid');
+        console.log(cardImages);
 
-        for(var i=0; i < cardDivs.length; i++) {
+        for(var i=0; i < cardImages.length; i++) {
           // Function to add an event to each card div.
           function divCardEvent() {
             // Need to give this inner anonymous function a copy
@@ -96,11 +97,11 @@
             (function(j) {
               // Find the marker whose title matches the card's id.
               var matchingMarker = markers.find(function(marker) {
-                return marker.title == cardDivs[j].id;
+                return marker.title == cardImages[j].id;
               });
               // The top 3 cards don't have a marker for some reason.
               if (matchingMarker) {
-                cardDivs[j].addEventListener('click', function() {
+                cardImages[j].addEventListener('click', function() {
                   // Google Maps markers need this method call instead of
                   // marker.click().
                   google.maps.event.trigger(matchingMarker, 'click');

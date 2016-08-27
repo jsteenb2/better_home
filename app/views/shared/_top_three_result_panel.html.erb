@@ -1,5 +1,5 @@
 <div class="card card-inverse card-<%= %w(primary info danger)[num] %>">
-  <%= link_to image_tag(get_image, class: "img-fluid"), neighborhood_inspect_path(neighborhood: ActiveSupport::JSON.encode(neighborhood)) %>
+  <%= image_tag(get_image, class: "img-fluid", id: "#{neighborhood['name']}") %>
   <div class="card-block">
     <h4 class="card-title"><strong><%= neighborhood["name"] %></strong></h4>
     <p class="card-text"> Overall Score Compatibility: <%= neighborhood["overall_score"] %> </p>
