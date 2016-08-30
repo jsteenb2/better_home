@@ -27,15 +27,15 @@ class ApplicationController < ActionController::Base
     end
 
     def commute_factor(scale, distance_from)
-      if distance_from > 10.0
+      if distance_from > 12.0
         factor = 5
       elsif distance_from > 7.0
         factor = 4
-      elsif distance_from > 5.0
+      elsif distance_from > 3.5
         factor = 3
-      elsif distance_from > 3.0
+      elsif distance_from > 1.5
         factor = 2
-      elsif distance_from > 1.0
+      elsif distance_from > 0.7
         factor = 1
       else
         factor = 0

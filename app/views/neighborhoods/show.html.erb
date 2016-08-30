@@ -20,9 +20,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><%= get_commute(@distance, 3.1) %></td>
-                    <td><%= get_commute(@distance, 9.6) %></td>
-                    <td><%= get_commute(@distance, 20) %></td>
+                    <td><%= get_commute(@distance, 3.1).floor %> mins</td>
+                    <td><%= get_commute(@distance, 9.6).floor %> mins</td>
+                    <td><%= get_commute(@distance, 20).floor %> mins</td>
                   </tr>
                 </tbody>
               </table>
@@ -47,24 +47,16 @@
       <div class="panel panel-default">
         <h2>Most Popular Places</h2>
         <div class="panel-body">
-          <div class="row">
+          <div class="row" id="yelp">
             <% @yelp_responses.each do |response| %>
-              <div class="col-md-3">
-                <p><%= link_to response.name, response.url %></p>
-              </div>
-            <% end %>
-          </div>
-          <div class="row">
-            <% @yelp_responses.each do |response| %>
-              <div class="col-md-3">
-                <%= link_to(image_tag(response.image_url, class: "img-circle"), response.url) %>
-              </div>
-            <% end %>
-          </div>
-          <div class="row">
-            <% @yelp_responses.each do |response| %>
-              <div class="col-md-3">
-                <%= image_tag(response.rating_img_url) %>
+              <div class="col-xs-6 col-sm-3 yelp-wrap">
+                <div class="text-center">
+                  <%= link_to response.url, class: "text-center" do %>
+                    <%= response.name %>
+                    <%= image_tag(response.image_url, class: "img-circle img-responsive") %>
+                    <%= image_tag(response.rating_img_url, class: "img-responsive") %>
+                  <% end %>
+                </div>
               </div>
             <% end %>
           </div>
@@ -74,7 +66,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      
+
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="list-group">

@@ -348,3 +348,28 @@ nav{
     margin-top: 5px;
   }
 }
+
+#yelp{
+  text-align: center;
+  .yelp-wrap {
+    min-height: 170px;
+    div{
+      text-overflow: ellipsis;
+      /* Required for text-overflow to do anything */
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  div{
+    div{
+      a{
+        width: 100%;
+        img{
+          display: block;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+}
