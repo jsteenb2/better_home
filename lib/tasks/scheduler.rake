@@ -1,19 +1,9 @@
 require 'rake'
 
-def get_walkscore_stuff(neighbor)
-  hash = {}
-  walk = WalkscoreMain.get_walkscore("#{neighbor} san francisco ca")
-  
-  transit = WalkscoreMain.get_transitscore("#{neighbor} san francisco ca")
-  hash["walk_score"] = ( 5 - (walk["walkscore"]/20.0).ceil) if walk["walkscore"]
-  hash["transit_score"] = ( 5 - (transit["transit_score"]/20.0).ceil) if transit["transit_score"]
-  hash
-end
-
 task :update_db => :environment do
     puts 'Updating database..'
 
-    Score.destroy_all
+    # Score.destroy_all
 
     neighborhoods = ["mission", "bernal heights", "central richmond", "excelsior", "bayview", "central sunset", "downtown", "pacific heights", "nob hill", "visitacion valley", "parkside", "inner richmond", "south of market", "tenderloin", "noe valley", "inner sunset", "outer sunset", "portola", "russian hill", "outer parkside"]
 
@@ -21,7 +11,8 @@ task :update_db => :environment do
 
     puts "Finding scores . . . . . . "
     neighborhoods.each do |neighborhood|
-      Score.create(neighborhood: neighborhood, eviction_score: @addressinformation.eviction_score(neighborhood, 2015), fire_safety_score: @addressinformation.fire_safety_score(neighborhood, 2015), crime_score: @addressinformation.crime_score(neighborhood, 2015), fire_incidents_score: @addressinformation.fire_incidents_score(neighborhood, 2015), traffic_score: @addressinformation.traffic_violations_score(neighborhood, 2015))
+      score = Score.find_by_neighborhood(neighborhood)
+      score.update(neighborhood: neighborhood, eviction_score: @addressinformation.eviction_score(neighborhood, 2015), fire_safety_score: @addressinformation.fire_safety_score(neighborhood, 2015), crime_score: @addressinformation.crime_score(neighborhood, 2015), fire_incidents_score: @addressinformation.fire_incidents_score(neighborhood, 2015), traffic_score: @addressinformation.traffic_violations_score(neighborhood, 2015))
     end
 
     puts 'Update complete.'
@@ -30,6 +21,15 @@ end
 
 
 task :update_api_calls => :environment do
+  def get_walkscore_stuff(neighbor)
+    hash = {}
+    walk = WalkscoreMain.get_walkscore("#{neighbor} san francisco ca")
+
+    transit = WalkscoreMain.get_transitscore("#{neighbor} san francisco ca")
+    hash["walk_score"] = ( 5 - (walk["walkscore"]/20.0).ceil) if walk["walkscore"]
+    hash["transit_score"] = ( 5 - (transit["transit_score"]/20.0).ceil) if transit["transit_score"]
+    hash
+  end
 
   neighborhoods = [
      "Mission",
