@@ -23,19 +23,19 @@ class ApplicationController < ActionController::Base
   private
 
     def crime_factor(scale, hood)
-      (scale - 1) * (  hood )
+      (scale - 1) * ( hood )
     end
 
     def commute_factor(scale, distance_from)
-      if distance_from > 18.0
+      if distance_from > 10.0
         factor = 5
-      elsif distance_from > 11.0
-        factor = 4
       elsif distance_from > 7.0
-        factor = 3
+        factor = 4
       elsif distance_from > 5.0
-        factor = 2
+        factor = 3
       elsif distance_from > 3.0
+        factor = 2
+      elsif distance_from > 1.0
         factor = 1
       else
         factor = 0
