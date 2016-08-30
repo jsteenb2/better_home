@@ -13,24 +13,24 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <div class='col-sm-8'>
+      <div class='col-sm-6' id="search-container">
         <% if !current_user.walk_score.nil? %>
-            <%= simple_form_for current_user, :url => searches_path, method: :post, class: "navbar-form navbar-left" do |f| %>              
+            <%= simple_form_for current_user, :url => searches_path, method: :post, class: "navbar-form navbar-left" do |f| %>
               <div class="row" id="search-bar">
-                <div class='col-sm-4'>
-                <%= f.text_field :location_id, as: :search, class: 'form-control', placeholder: "Search for Location " %> 
+                <div class='col-sm-8 '>
+                <%= f.text_field :location_id, as: :search, class: 'form-control', placeholder: "Search for Location " %>
                 </div>
-                <div class='col-sm-2'>
+                <div class='col-sm-4'>
                   <%= f.button :submit, value: "Search", class: "btn btn-success btn-block active" %>
                 </div>
               </div>
-              
+
             <% end %>
 
         <% end %>
       </div>
-        
-    
+
+
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name.capitalize %></a>
