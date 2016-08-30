@@ -4,3 +4,14 @@
 #body-wrap{
   padding-top: 50px;
 }
+
+#survey{
+  @media (max-width: 415px) {
+    .checkbox-inline+.checkbox-inline, .radio-inline+.radio-inline{
+        padding-left: 10px;
+    }
+    .most-important-text{
+      margin-left: 10px;
+    }
+  }
+}
