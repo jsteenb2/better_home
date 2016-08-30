@@ -367,9 +367,24 @@ nav{
         img{
           display: block;
           margin: auto;
+          margin-bottom: 5px;
         }
       }
     }
   }
+}
 
+#fact-container{
+  @media (min-width: 768px) {
+    padding-top: 20px;
+  }
+  .panel-body{
+    padding: 0;
+  }
+  .panel, .panel-default{
+    border: none;
+  }
+  .list-group{
+    margin-bottom: 0;
+  }
 }

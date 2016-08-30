@@ -43,13 +43,29 @@
         </div>
       </div>
     </div>
+    <div class="col-md-6" id="fact-container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="list-group">
+            <a  class="list-group-item active" style="color: white;"> This neighborhood has <strong><%= @transitscore['summary'] %> </a>
+            <a  class="list-group-item "> This neighborhood is <strong><%= @walkscore['description'] %></a>
+            <a  class="list-group-item "> There are <strong><%= @factual['347'] %></strong> resturants nearby</a>
+            <a  class="list-group-item "> There are <strong><%= @factual['34'] %></strong> schools nearby nearby</a>
+            <a  class="list-group-item "> There are <strong><%= @factual['177'] %></strong> businesses nearby nearby</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <div class="panel panel-default">
         <h2>Most Popular Places</h2>
         <div class="panel-body">
           <div class="row" id="yelp">
             <% @yelp_responses.each do |response| %>
-              <div class="col-xs-6 col-sm-3 yelp-wrap">
+              <div class="col-xs-6 col-sm-6 yelp-wrap">
                 <div class="text-center">
                   <%= link_to response.url, class: "text-center" do %>
                     <%= response.name %>
@@ -59,22 +75,6 @@
                 </div>
               </div>
             <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="list-group">
-            <a  class="list-group-item active" style="color: white;"> This neighborhood has <strong><%= @transitscore['summary'] %> </a>
-            <a  class="list-group-item "> This neighborhood is <strong><%= @walkscore['description'] %></a>
-            <a  class="list-group-item "> There are <strong><%= @factual['347'] %></strong> resturants nearby</a>
-            <a  class="list-group-item "> There are <strong><%= @factual['34'] %></strong> schools nearby nearby</a>
-            <a  class="list-group-item "> There are <strong><%= @factual['177'] %></strong> businesses nearby nearby</a>
           </div>
         </div>
       </div>
