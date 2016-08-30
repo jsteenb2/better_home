@@ -1,0 +1,10 @@
+div.panel.panel-default#yelp-panel {
+  height: 400px;
+  div.panel-body {
+    height: 80%;
+  }
+
+  div.panel-body iframe {
+    height: 100%;
+  }
+}
