@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  around_action :handle_exceptions, only: [:index, :create]
+
   helper SearchesHelper
   def create
     if current_user
@@ -138,6 +140,15 @@ class SearchesController < ApplicationController
     def sort_by_overall_score
       @neighborhood_container = @neighborhood_container.sort do |a,b|
         b['overall_score'] <=> a['overall_score']
+      end
+    end
+
+    def handle_exceptions
+      begin
+        yield
+      rescue NoMethodError
+        flash[:danger] = "Make sure the location exists and the survey is completely filled out."
+        redirect_back(fallback_location: searches_path)
       end
     end
 
