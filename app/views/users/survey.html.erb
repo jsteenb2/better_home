@@ -2,6 +2,7 @@
   <div class="col-md-6 hidden-sm hidden-xs">
     <%=image_tag("san-franc-min.jpg", class: "survey-picture") %></div>
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0" id="survey">
+    <h3 class="text-muted text-center">Your survey answers will help us pinpoint the perfect home for <strong>you</strong></h3>
   <%= simple_form_for @user, :url => searches_path, method: :post do |f| %>
 
     <div class="panel panel-primary number-score">
@@ -9,13 +10,13 @@
         <div class="survey-question">
           <%= f.label :cost_score, "How important is housing cost?" %>
         </div>
+        (1:least important | 5:most important)
       </div>
       <div class="form-group">
-        Least <%= f.input_field :cost_score, collection: 1..5,
+        <%= f.input_field :cost_score, collection: 1..5,
                 as: :radio_buttons,
                 item_wrapper_class: 'radio-inline',
                 input_html: {required: true}%>
-                <span class="most-important-text">Most</span>
       </div>
     </div>
 
@@ -24,12 +25,12 @@
         <div class="survey-question">
           <%= f.label :transit_score, "How important is the availability of public transportation?" %>
         </div>
+        (1:least important | 5:most important)
       </div>
       <div class="form-group">
-        Least <%= f.input_field :transit_score, collection: 1..5,
+        <%= f.input_field :transit_score, collection: 1..5,
                 as: :radio_buttons,
                 item_wrapper_class: 'radio-inline' %>
-                <span class="most-important-text">Most</span>
       </div>
     </div>
 
@@ -38,12 +39,12 @@
         <div class="survey-question">
           <%= f.label :walk_score, "How important is it to have everything within walking distance?" %>
         </div>
+        (1:least important | 5:most important)
       </div>
       <div class="form-group">
-        Least <%= f.input_field :walk_score, collection: 1..5,
+        <%= f.input_field :walk_score, collection: 1..5,
                 as: :radio_buttons,
                 item_wrapper_class: 'radio-inline' %>
-                <span class="most-important-text">Most</span>
       </div>
     </div>
 
@@ -52,12 +53,12 @@
         <div class="survey-question">
           <%= f.label :commute_score, "How important is it to live close to your workplace?" %>
         </div>
+        (1:least important | 5:most important)
       </div>
       <div class="form-group">
-        Least <%= f.input_field :commute_score, collection: 1..5,
+        <%= f.input_field :commute_score, collection: 1..5,
                 as: :radio_buttons,
                 item_wrapper_class: 'radio-inline' %>
-                <span class="most-important-text">Most</span>
       </div>
     </div>
 
@@ -66,16 +67,17 @@
         <div class="survey-question">
           <%= f.label :crime_score, "How important is it for you to live in a safe neighborhood?" %>
         </div>
+        (1:least important | 5:most important)
       </div>
       <div class="form-group">
-        Least <%= f.input_field :crime_score, collection: 1..5,
+        <%= f.input_field :crime_score, collection: 1..5,
                 as: :radio_buttons,
                 item_wrapper_class: 'radio-inline' %>
-                <span class="most-important-text">Most</span>
       </div>
     </div>
 
-    <div class="container" id="survey-submit">
+    <!-- <div class="col-sm-6 col-offset-3" id="survey-submit"> -->
+    <div class="col-sm-8 col-sm-offset-2">
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-addon">Address</div>

@@ -16,7 +16,7 @@
 
 #survey-submit
 {
-  width: 60%;
+  // width: 60%;
 }
 
 
@@ -337,4 +337,10 @@ footer {
 
 .card-text {
   font-size:15px;
+}
+
+nav{
+  .navbar-toggle .icon-bar {
+    background-color: white;
+  }
 }
