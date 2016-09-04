@@ -2,6 +2,7 @@
 - - -
 
 ##[DEMO](https://github.com/jsteenb2/better_home/blob/master/demo.md)
+##[DEPLOYED APP](https://boiling-eyrie-10872.herokuapp.com)
 
 # Project Walkthrough
 
@@ -65,7 +66,7 @@ User experience was initially very bad as a number of API calls were being made 
 
 Rake tasks are included and scheduled to run every day at 02:00 to update the crime statistics and other demographic information obtained through **Socrata**.  Heroku's **Scheduler** add on.
 
-**SendGrid** addon for Heroku was used in correlation with **delayed jobs** to send emails asynchronously.  
+**SendGrid** addon for Heroku was used in correlation with **delayed jobs** to send emails asynchronously.
 
 ## Prerequisites
 
@@ -86,9 +87,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* [**Johnny Steenbergen**](https://github.com/jsteenb2) 
-* [**CJ Virtucio**](https://github.com/cjvirtucio87) 
-* [**Phil Johnson**](https://github.com/philipcolejohnson) 
+* [**Johnny Steenbergen**](https://github.com/jsteenb2)
+* [**CJ Virtucio**](https://github.com/cjvirtucio87)
+* [**Phil Johnson**](https://github.com/philipcolejohnson)
 * [**Graham Turner**](https://github.com/tgturner)
 * [**Adrian Mui**](https://github.com/adrianmui)
 * [**Dylan Lynch**](https://github.com/lynchd2)
@@ -97,4 +98,3 @@ Add additional notes about how to deploy this on a live system
 ## Acknowledgments
 
 * We tip our hats to Viking Code School for pushing us to develop the skills we need to be successful full stack developers.
-
