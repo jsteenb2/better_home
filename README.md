@@ -1,5 +1,6 @@
 # Better Home
 - - -
+The eHarmony for home searches. Find your ideal match today!
 
 ##[DEMO](https://github.com/jsteenb2/better_home/blob/master/demo.md)
 ##[DEPLOYED APP](https://boiling-eyrie-10872.herokuapp.com)
