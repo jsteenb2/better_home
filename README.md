@@ -1,5 +1,4 @@
 # Better Home
-- - -
 The eHarmony for home searches. Find your ideal match today!
 
 ##[DEMO](https://github.com/jsteenb2/better_home/blob/master/demo.md)
